@@ -1,0 +1,3 @@
+C:\Users\teste\Documents\repos\Vivencia19ManhaWinforms\Nsf.App.Utils\obj\Debug\Nsf.App.Utils.csprojAssemblyReference.cache
+C:\Users\teste\Documents\repos\Vivencia19ManhaWinforms\Nsf.App.Utils\obj\Debug\Nsf.App.Utils.Properties.Resource1.resources
+C:\Users\teste\Documents\repos\Vivencia19ManhaWinforms\Nsf.App.Utils\obj\Debug\Nsf.App.Utils.csproj.GenerateResource.cache
