@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CursoApi.cs" />
     <Compile Include="Exemplo\ExemploAPI.cs" />
     <Compile Include="ProfessorApi.cs" />
     <Compile Include="ProfessorDisciplinaApi.cs" />
