@@ -11,3 +11,4 @@ C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.Model\bin\Debug\Nsf.
 C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.Model\bin\Debug\Nsf.App.Model.pdb
 C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.Model\obj\Debug\Nsf.App.Model.dll
 C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.Model\obj\Debug\Nsf.App.Model.pdb
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.Model\obj\Debug\Nsf.App.Model.csprojResolveAssemblyReference.cache
