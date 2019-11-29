@@ -272,6 +272,7 @@
             this.btnVestibularAdd.Text = "Adicionar";
             this.btnVestibularAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnVestibularAdd.UseVisualStyleBackColor = false;
+            this.btnVestibularAdd.Click += new System.EventHandler(this.btnVestibularAdd_Click);
             // 
             // label11
             // 

@@ -9,6 +9,7 @@ namespace Nsf.App.UI
         public frmExemploConsultar()
         {
             InitializeComponent();
+            Carregar();
         }
 
         public void Carregar()

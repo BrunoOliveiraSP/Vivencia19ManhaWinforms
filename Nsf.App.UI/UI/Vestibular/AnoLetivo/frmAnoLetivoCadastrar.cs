@@ -51,7 +51,10 @@ namespace Nsf.App.UI
                 Nsf.App.API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
 
                 if (id > 0)
+                {
+                    model.IdAnoLetivo = id;
                     api.Alterar(model);
+                }
 
                 else
                     api.Inserir(model);
