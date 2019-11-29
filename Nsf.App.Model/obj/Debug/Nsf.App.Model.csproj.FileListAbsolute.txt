@@ -17,3 +17,7 @@ C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms5\Nsf.App.Model\bin\Debug\Nsf
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms5\Nsf.App.Model\obj\Debug\Nsf.App.Model.csprojResolveAssemblyReference.cache
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms5\Nsf.App.Model\obj\Debug\Nsf.App.Model.dll
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms5\Nsf.App.Model\obj\Debug\Nsf.App.Model.pdb
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.Model\bin\Debug\Nsf.App.Model.dll
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.Model\bin\Debug\Nsf.App.Model.pdb
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.Model\obj\Debug\Nsf.App.Model.dll
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.Model\obj\Debug\Nsf.App.Model.pdb
