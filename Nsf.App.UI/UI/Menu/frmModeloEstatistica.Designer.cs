@@ -63,6 +63,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lblDash2 = new System.Windows.Forms.Label();
             this.lblDash = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -473,10 +475,35 @@
             this.lblDash.TabIndex = 168;
             this.lblDash.Text = "Olá, seja bem-vindo!";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold);
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(600, 100);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(153, 19);
+            this.label14.TabIndex = 163;
+            this.label14.Text = "Exemplo Consultar";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold);
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(595, 123);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(157, 19);
+            this.label15.TabIndex = 170;
+            this.label15.Text = "Exemplo Cadastrar";
+            // 
             // frmModeloEstatistica
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.lblDash2);
             this.Controls.Add(this.lblDash);
             this.Controls.Add(this.panel2);
@@ -536,5 +563,7 @@
 		private System.Windows.Forms.Label lblContribuicao;
         private System.Windows.Forms.Label lblDash2;
         private System.Windows.Forms.Label lblDash;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
     }
 }
