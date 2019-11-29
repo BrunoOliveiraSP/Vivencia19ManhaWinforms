@@ -15,71 +15,77 @@ namespace Nsf.App.UI
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            Nsf.App.Model.ProfessorModel prof = new Model.ProfessorModel();
-            if (Convert.ToInt32(lblId.Text) != 0)
+            try
             {
-                lblId.Visible = true;
-                prof.IdProfessor = Convert.ToInt32(lblId.Text);
-                prof.NmProfessor = txtNome.Text;
-                prof.NmPai = txtPai.Text;
-                prof.NmMae = txtNome.Text;
-                prof.BtAtivo = chkAtivo.Checked;
-                prof.DsCelular = txtCelular.Text;
-                prof.DsCpf = txtCpf.Text;
-                prof.DsCurso = txtCurso.Text;
-                prof.DsCvLattes = txtCvLattes.Text;
-                prof.DsEmail = txtEmail.Text;
-                prof.DsEstado = txtEstadoNasc.Text;
-                prof.DsFaculdade = txtFaculdade.Text;
-                prof.DsRg = txtRG.Text;
-                prof.DsRgEmissor = txtRGEmissao.Text;
-                prof.DsRgOrgao = txtRGOrgao.Text;
-                prof.DsTelefone = txtTelefone.Text;
-                prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
-                prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
-                prof.DtNascimento = dtpNascimento.Value;
-                prof.IdLogin = Convert.ToInt32(txtLogin.Text);
-                prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
-                prof.TpContratacao = cboContrato.Text;
+                Model.ProfessorModel prof = new Model.ProfessorModel();
 
-                Nsf.App.API.Client.ProfessorApi api = new API.Client.ProfessorApi();
-                api.Alterar(prof);
+                if (Convert.ToInt32(lblId.Text) != 0)
+                {
+                    lblId.Visible = true;
+                    prof.IdProfessor = Convert.ToInt32(lblId.Text);
+                    prof.NmProfessor = txtNome.Text;
+                    prof.NmPai = txtPai.Text;
+                    prof.NmMae = txtNome.Text;
+                    prof.BtAtivo = chkAtivo.Checked;
+                    prof.DsCelular = txtCelular.Text;
+                    prof.DsCpf = txtCpf.Text;
+                    prof.DsCurso = txtCurso.Text;
+                    prof.DsCvLattes = txtCvLattes.Text;
+                    prof.DsEmail = txtEmail.Text;
+                    prof.DsEstado = txtEstadoNasc.Text;
+                    prof.DsFaculdade = txtFaculdade.Text;
+                    prof.DsRg = txtRG.Text;
+                    prof.DsRgEmissor = txtRGEmissao.Text;
+                    prof.DsRgOrgao = txtRGOrgao.Text;
+                    prof.DsTelefone = txtTelefone.Text;
+                    prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
+                    prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
+                    prof.DtNascimento = dtpNascimento.Value;
+                    prof.IdLogin = Convert.ToInt32(txtLogin.Text);
+                    prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
+                    prof.TpContratacao = cboContrato.Text;
 
-                MessageBox.Show("Alterado com sucesso", "NSF");
+                    API.Client.ProfessorApi api = new API.Client.ProfessorApi();
+                    api.Alterar(prof);
 
+                    MessageBox.Show("Alterado com sucesso", "NSF");
+                }
+                else
+                {
+                    prof.NmProfessor = txtNome.Text;
+                    prof.NmPai = txtPai.Text;
+                    prof.NmMae = txtMae.Text;
+                    prof.BtAtivo = chkAtivo.Checked;
+                    prof.DsCelular = txtCelular.Text;
+                    prof.DsCpf = txtCpf.Text;
+                    prof.DsCurso = txtCurso.Text;
+                    prof.DsCvLattes = txtCvLattes.Text;
+                    prof.DsEmail = txtEmail.Text;
+                    prof.DsEstado = txtEstadoNasc.Text;
+                    prof.DsFaculdade = txtFaculdade.Text;
+                    prof.DsRg = txtRG.Text;
+                    prof.DsRgEmissor = txtRGEmissao.Text;
+                    prof.DsRgOrgao = txtRGOrgao.Text;
+                    prof.DsTelefone = txtTelefone.Text;
+                    prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
+                    prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
+                    prof.DtNascimento = dtpNascimento.Value;
+                    prof.IdLogin = Convert.ToInt32(txtLogin.Text);
+                    prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
+                    prof.TpContratacao = cboContrato.Text;
+
+                    API.Client.ProfessorApi Api = new API.Client.ProfessorApi();
+                    Api.Inserir(prof);
+
+                    MessageBox.Show("Inserido com sucesso", "NSF");
+                }
             }
-            else
+            catch (ArgumentException ex)
             {
-                prof.NmProfessor = txtNome.Text;
-                prof.NmPai = txtPai.Text;
-                prof.NmMae = txtNome.Text;
-                prof.BtAtivo = chkAtivo.Checked;
-                prof.DsCelular = txtCelular.Text;
-                prof.DsCpf = txtCpf.Text;
-                prof.DsCurso = txtCurso.Text;
-                prof.DsCvLattes = txtCvLattes.Text;
-                prof.DsEmail = txtEmail.Text;
-                prof.DsEstado = txtEstadoNasc.Text;
-                prof.DsFaculdade = txtFaculdade.Text;
-                prof.DsRg = txtRG.Text;
-                prof.DsRgEmissor = txtRGEmissao.Text;
-                prof.DsRgOrgao = txtRGOrgao.Text;
-                prof.DsTelefone = txtTelefone.Text;
-                prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
-                prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
-                prof.DtNascimento = dtpNascimento.Value;
-                prof.IdLogin = Convert.ToInt32(txtLogin.Text);
-                prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
-                prof.TpContratacao = cboContrato.Text;
-
-                Nsf.App.API.Client.ProfessorApi Api = new API.Client.ProfessorApi();
-                Api.Inserir(prof);
-
-                MessageBox.Show("Inserido com sucesso", "NSF");
-
+                MessageBox.Show(ex.Message);
             }
-
         }
+
         public void CarregaarCampos (Model.ProfessorModel prof)
         {
             lblId.Text = prof.IdProfessor.ToString();
@@ -104,7 +110,6 @@ namespace Nsf.App.UI
             txtLogin.Text = prof.IdLogin.ToString();
             nudPrimeiroEmprego.Value = prof.NrAnoPrimeiroEmprego;
             cboContrato.Text = prof.TpContratacao;
-            
         }
     }
 }

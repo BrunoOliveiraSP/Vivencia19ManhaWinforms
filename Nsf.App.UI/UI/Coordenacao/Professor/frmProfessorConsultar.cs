@@ -26,22 +26,18 @@ namespace Nsf.App.UI
             {
                 Model.ProfessorModel model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorModel;
 
-              DialogResult r = MessageBox.Show("Deseja excluir", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show("Deseja excluir", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if(r == DialogResult.Yes)
+                if (r == DialogResult.Yes)
                 {
                     API.Client.ProfessorApi api = new API.Client.ProfessorApi();
                     api.Deletar(model.IdProfessor);
-              
+
                     MessageBox.Show("Removido com Sucesso");
 
                     CarregarGrid();
                 }
-
             }
-
-
-
         }
 
         private void frmProfessorConsultar_Load(object sender, EventArgs e)
@@ -51,17 +47,24 @@ namespace Nsf.App.UI
 
         private void txtNome_TextChanged(object sender, EventArgs e)
         {
-            string nome = txtNome.Text;
-
-            if (nome != string.Empty)
+            try
             {
-                API.Client.ProfessorApi db = new API.Client.ProfessorApi();
-                List<Model.ProfessorModel> lista = db.ConsultarPorNome(nome);
-                dgvProfessores.AutoGenerateColumns = false;
-                dgvProfessores.DataSource = lista;
+                string nome = txtNome.Text;
+
+                if (nome != string.Empty)
+                {
+                    API.Client.ProfessorApi db = new API.Client.ProfessorApi();
+                    List<Model.ProfessorModel> lista = db.ConsultarPorNome(nome);
+                    dgvProfessores.AutoGenerateColumns = false;
+                    dgvProfessores.DataSource = lista;
+                }
+                else
+                    CarregarGrid();
             }
-            else
-                CarregarGrid();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void CarregarGrid()
@@ -71,8 +74,5 @@ namespace Nsf.App.UI
             dgvProfessores.AutoGenerateColumns = false;
             dgvProfessores.DataSource = lista;
         }
-       
-        }
-
-
     }
+}
