@@ -44,7 +44,7 @@ namespace Nsf.App.Model
 
         public string TpContratacao { get; set; }
 
-        public ulong BtAtivo { get; set; }
+        public bool BtAtivo { get; set; }
 
         public string DsFaculdade { get; set; }
 
