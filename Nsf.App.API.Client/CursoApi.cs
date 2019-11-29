@@ -8,6 +8,5 @@ namespace Nsf.App.API.Client
 {
     class CursoApi
     {
-        public List<Model.>
     }
 }
