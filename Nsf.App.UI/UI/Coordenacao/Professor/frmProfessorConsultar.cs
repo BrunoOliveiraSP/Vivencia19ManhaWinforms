@@ -18,7 +18,7 @@ namespace Nsf.App.UI
             {
                 Model.ProfessorModel model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorModel;
                 frmProfessorCadastrar tela = new frmProfessorCadastrar();
-                tela.Show();
+                frmInicial.Current.OpenScreen(new frmProfessorCadastrar());
                 tela.CarregaarCampos(model);
                 Hide();
                 
