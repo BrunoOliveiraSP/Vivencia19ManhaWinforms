@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CursoModel.cs" />
+    <Compile Include="DiciplinaModel.cs" />
     <Compile Include="Exemplo\ExemploModel.cs" />
     <Compile Include="AnoLetivoModel.cs" />
+    <Compile Include="ProfessorDisciplinaModel.cs" />
     <Compile Include="ProfessorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

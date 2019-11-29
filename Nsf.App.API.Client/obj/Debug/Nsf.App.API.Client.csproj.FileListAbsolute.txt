@@ -21,3 +21,13 @@ C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.API.Client\bin\Debu
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.API.Client\bin\Debug\Nsf.App.Model.dll
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.API.Client\bin\Debug\Nsf.App.Model.pdb
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms6\Nsf.App.API.Client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\obj\Debug\Nsf.App.API.Client.csprojAssemblyReference.cache
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\obj\Debug\Nsf.App.API.Client.dll
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\bin\Debug\Nsf.App.API.Client.dll
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\bin\Debug\Nsf.App.API.Client.pdb
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\bin\Debug\Newtonsoft.Json.dll
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\bin\Debug\Nsf.App.Model.dll
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\bin\Debug\Nsf.App.Model.pdb
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\obj\Debug\Nsf.App.API.Client.csproj.CopyComplete
+C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms2\Nsf.App.API.Client\obj\Debug\Nsf.App.API.Client.pdb
