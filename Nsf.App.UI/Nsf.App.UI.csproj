@@ -11,6 +11,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,6 +56,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\Exemplo\frmExemploConsultar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Exemplo\frmExemploConsultar.Designer.cs">
+      <DependentUpon>frmExemploConsultar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Exemplo\frmExemploCadastrar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Exemplo\frmExemploCadastrar.Designer.cs">
+      <DependentUpon>frmExemploCadastrar.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Menu\frmModeloEstatistica.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,6 +227,12 @@
     <Compile Include="UI\Coordenacao\Salas\Aula\frmSalaCadastrar.Designer.cs">
       <DependentUpon>frmSalaCadastrar.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\Exemplo\frmExemploConsultar.resx">
+      <DependentUpon>frmExemploConsultar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Exemplo\frmExemploCadastrar.resx">
+      <DependentUpon>frmExemploCadastrar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Menu\frmModeloEstatistica.resx">
       <DependentUpon>frmModeloEstatistica.cs</DependentUpon>
     </EmbeddedResource>
