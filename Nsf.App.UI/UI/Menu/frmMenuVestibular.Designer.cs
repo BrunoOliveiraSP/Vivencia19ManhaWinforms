@@ -563,8 +563,6 @@
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label lblMnesalidades;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label lblMensalidades;
         private System.Windows.Forms.Label label19;
