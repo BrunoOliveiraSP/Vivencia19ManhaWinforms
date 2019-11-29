@@ -20,6 +20,8 @@ namespace Nsf.App.UI
                 frmProfessorCadastrar tela = new frmProfessorCadastrar();
                 tela.Show();
                 tela.CarregaarCampos(model);
+                Hide();
+                
             }
 
             if (e.ColumnIndex == 5)
@@ -42,7 +44,7 @@ namespace Nsf.App.UI
 
         private void frmProfessorConsultar_Load(object sender, EventArgs e)
         {
-            CarregarGrid();
+           // CarregarGrid();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -58,8 +60,8 @@ namespace Nsf.App.UI
                     dgvProfessores.AutoGenerateColumns = false;
                     dgvProfessores.DataSource = lista;
                 }
-                else
-                    CarregarGrid();
+                
+            CarregarGrid();
             }
             catch (Exception ex)
             {
