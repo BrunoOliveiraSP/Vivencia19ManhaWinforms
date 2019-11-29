@@ -13,6 +13,7 @@ namespace Nsf.App.UI
         private void txtCurso_TextChanged(object sender, EventArgs e)
         {
 
+
         }
     }
 }
