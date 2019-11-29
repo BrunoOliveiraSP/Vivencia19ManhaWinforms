@@ -15,7 +15,40 @@ namespace Nsf.App.UI
         public frmAnoLetivoConsultar()
         {
             InitializeComponent();
+
+            CarregarGrid();
 		}
 
+        private void CarregarGrid()
+        {
+            Nsf.App.API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
+
+            List<Nsf.App.Model.AnoLetivoModel> lista = api.ConsultarTodos();
+
+            dgvAnosLetivos.AutoGenerateColumns = false;
+            dgvAnosLetivos.DataSource = lista;
+        }
+
+        private void dgvAnosLetivos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 4)
+            {
+                Model.AnoLetivoModel model = dgvAnosLetivos.CurrentRow.DataBoundItem as Model.AnoLetivoModel;
+
+                Nsf.App.UI.frmAnoLetivoCadastrar tela = new frmAnoLetivoCadastrar();
+                tela.CarregarTela(model);
+
+                tela.Show();
+            }
+
+            if (e.ColumnIndex == 5)
+            {
+                Model.AnoLetivoModel model = dgvAnosLetivos.CurrentRow.DataBoundItem as Model.AnoLetivoModel;
+
+                API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
+
+                api.Remover(model.IdAnoLetivo);
+            }
+        }
     }
 }

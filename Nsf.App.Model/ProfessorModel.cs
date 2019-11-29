@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nsf.App.Model.Model
+namespace Nsf.App.Model
 {
     class ProfessorModel
     {
