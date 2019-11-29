@@ -81,6 +81,7 @@
             this.cboInstituicao.Name = "cboInstituicao";
             this.cboInstituicao.Size = new System.Drawing.Size(388, 29);
             this.cboInstituicao.TabIndex = 0;
+            this.cboInstituicao.SelectedIndexChanged += new System.EventHandler(this.cboInstituicao_SelectedIndexChanged);
             // 
             // panelId
             // 

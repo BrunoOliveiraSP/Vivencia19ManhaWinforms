@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nsf.App.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace Nsf.App.UI
         public frmAnoLetivoCadastrar()
         {
             InitializeComponent();
+            CarregarGrid();
         }
 
         int id = 0;
@@ -60,6 +62,28 @@ namespace Nsf.App.UI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnTurmaAdd_Click(object sender, EventArgs e)
+        {
+            Nsf.App.Model.TurmaModel turma = new Model.TurmaModel();
+            turma.TpPeriodo = cboTurmaPeriodo.Text;
+            turma.NmTurma = txtTurmaNome.Text;
+            turma.NrCapacidadeMax = Convert.ToInt32(nudTurmaCapacidade.Value);
+
+            Nsf.App.API.Client.TurmaAPI api = new Nsf.App.API.Client.TurmaAPI();
+            api.InserirTurma(turma);
+
+            MessageBox.Show("Turma cadastrada");
+        }
+
+        public void CarregarGrid()
+        {
+            API.Client.TurmaAPI API = new App.API.Client.TurmaAPI();
+            List<TurmaModel> turma = API.ListarTodos();
+
+            dgvTurma.AutoGenerateColumns = false;
+            dgvTurma.DataSource = turma;
         }
     }
 }

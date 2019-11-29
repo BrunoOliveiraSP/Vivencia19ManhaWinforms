@@ -45,9 +45,15 @@ namespace Nsf.App.UI
             {
                 Model.AnoLetivoModel model = dgvAnosLetivos.CurrentRow.DataBoundItem as Model.AnoLetivoModel;
 
-                API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
+                DialogResult r = MessageBox.Show("Deseja Remover?", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                api.Remover(model.IdAnoLetivo);
+                if (r == DialogResult.Yes)
+                {
+                    API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
+
+                    api.Remover(model.IdAnoLetivo);
+                    MessageBox.Show("Removido com sucesso");
+                }
             }
         }
     }
