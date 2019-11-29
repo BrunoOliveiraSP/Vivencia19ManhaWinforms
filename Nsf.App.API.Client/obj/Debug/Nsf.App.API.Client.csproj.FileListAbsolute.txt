@@ -7,3 +7,4 @@ C:\Users\teste\Source\Repos\Vivencia19ManhaWinForms\Nsf.App.API.Client\bin\Debug
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinForms\Nsf.App.API.Client\bin\Debug\Nsf.App.API.Client.pdb
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinForms\Nsf.App.API.Client\obj\Debug\Nsf.App.API.Client.dll
 C:\Users\teste\Source\Repos\Vivencia19ManhaWinForms\Nsf.App.API.Client\obj\Debug\Nsf.App.API.Client.pdb
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.API.Client\obj\Debug\Nsf.App.API.Client.csprojResolveAssemblyReference.cache
