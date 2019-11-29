@@ -43,7 +43,8 @@
   <ItemGroup>
     <Compile Include="CursoModel.cs" />
     <Compile Include="DiciplinaModel.cs" />
-    <Compile Include="Exemplo\ExemploModel.cs" />
+    <Compile Include="ErroModel.cs" />
+    <Compile Include="ExemploModel.cs" />
     <Compile Include="AnoLetivoModel.cs" />
     <Compile Include="ProfessorDisciplinaModel.cs" />
     <Compile Include="ProfessorModel.cs" />

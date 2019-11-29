@@ -17,7 +17,7 @@ namespace Nsf.App.API.Client
             string json = JsonConvert.SerializeObject(professordisciplna);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PostAsync("http://localhost:5000/professordisciplna/", body).Result;
+            var resp = client.PostAsync("http://localhost:5000/ProfessorDisciplina/", body).Result;
         }
 
         public void Alterar(Model.ProfessorDisciplinaModel professordisciplna)
@@ -25,17 +25,17 @@ namespace Nsf.App.API.Client
             string json = JsonConvert.SerializeObject(professordisciplna);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PutAsync("http://localhost:5000/professordisciplna/", body).Result;
+            var resp = client.PutAsync("http://localhost:5000/ProfessorDisciplina/", body).Result;
         }
 
         public void Deletar(int id)
         {
-            var resp = client.DeleteAsync("http://localhost:5000/professordisciplna/" + id).Result;
+            var resp = client.DeleteAsync("http://localhost:5000/ProfessorDisciplina/" + id).Result;
         }
 
         public List<Model.ProfessorDisciplinaModel> ListarTodos()
         {
-            string json = client.GetAsync("http://localhost:5000/professordisciplna/").Result.Content.ReadAsStringAsync().Result;
+            string json = client.GetAsync("http://localhost:5000/ProfessorDisciplina/").Result.Content.ReadAsStringAsync().Result;
 
             List<Model.ProfessorDisciplinaModel> list = JsonConvert.DeserializeObject <List< Model.ProfessorDisciplinaModel >> (json);
 

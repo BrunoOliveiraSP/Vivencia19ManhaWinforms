@@ -497,6 +497,7 @@
             this.label15.Size = new System.Drawing.Size(157, 19);
             this.label15.TabIndex = 170;
             this.label15.Text = "Exemplo Cadastrar";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // frmModeloEstatistica
             // 

@@ -26,5 +26,20 @@ namespace Nsf.App.UI
             dgvCursos.AutoGenerateColumns = false;
             dgvCursos.DataSource = cursos;
         }
+
+        private void dgvCursos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5)
+            {
+                Model.CursoModel curso = dgvCursos.CurrentRow.DataBoundItem as Model.CursoModel;
+
+                DialogResult r = MessageBox.Show("Deseja remover?", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    API.Client.CursoApi api = new API.Client.CursoApi();
+                    api.Remover(curso.IdCurso);
+                }
+            }
+            }
     }
 }

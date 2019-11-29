@@ -23,5 +23,10 @@ namespace Nsf.App.API.Client
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
         }
+        public void Remover(int id)
+        {
+            HttpClient client = new HttpClient();
+            var resp = client.DeleteAsync("http:localhost:5000/Curso/" + id).Result;
+        }
     }
 }
