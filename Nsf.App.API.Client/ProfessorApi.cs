@@ -6,9 +6,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nsf.App.API.Client.APIs
+namespace Nsf.App.API.Client
 {
-    class ProfessorApi
+    public class ProfessorApi
     {
         HttpClient client = new HttpClient();
 
@@ -50,9 +50,6 @@ namespace Nsf.App.API.Client.APIs
 
             return list;
         }
-
-
-
 
 
     }
