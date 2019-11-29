@@ -148,7 +148,6 @@
             this.txtDisciplina.Name = "txtDisciplina";
             this.txtDisciplina.Size = new System.Drawing.Size(333, 27);
             this.txtDisciplina.TabIndex = 0;
-            this.txtDisciplina.TextChanged += new System.EventHandler(this.txtDisciplina_TextChanged);
             // 
             // label68
             // 
