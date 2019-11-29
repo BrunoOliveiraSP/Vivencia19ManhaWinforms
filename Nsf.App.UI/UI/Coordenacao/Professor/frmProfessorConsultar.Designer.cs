@@ -183,6 +183,7 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmProfessorConsultar";
             this.Size = new System.Drawing.Size(800, 600);
+            this.Load += new System.EventHandler(this.frmProfessorConsultar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfessores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

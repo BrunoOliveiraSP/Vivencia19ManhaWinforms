@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Nsf.App.UI
@@ -17,6 +18,14 @@ namespace Nsf.App.UI
             {
                 Model.ProfessorModel model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorModel;
             }
+        }
+
+        private void frmProfessorConsultar_Load(object sender, EventArgs e)
+        {
+            API.Client.ProfessorApi db = new API.Client.ProfessorApi();
+            List<Model.ProfessorModel> lista = db.ListarTodos();
+            dgvProfessores.AutoGenerateColumns = false;
+            dgvProfessores.DataSource = lista;
         }
     }
 }
