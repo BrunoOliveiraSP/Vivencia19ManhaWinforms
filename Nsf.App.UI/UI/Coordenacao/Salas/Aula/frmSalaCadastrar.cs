@@ -9,5 +9,9 @@ namespace Nsf.App.UI
 			InitializeComponent();
 		}
 
+        private void cboInstituicao_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
