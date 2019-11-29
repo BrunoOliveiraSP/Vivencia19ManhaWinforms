@@ -18,9 +18,5 @@ namespace Nsf.App.UI
 
         }
 
-        public void CarregarGrid()
-        {
-            
-        }
     }
 }
