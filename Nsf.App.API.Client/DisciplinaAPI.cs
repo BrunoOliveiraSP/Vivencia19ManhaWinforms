@@ -51,6 +51,7 @@ namespace Nsf.App.API.Client
         public List<DiciplinaModel> ListarDisciplina(string disciplina)
         {
             string json;
+
             if (string.IsNullOrEmpty(disciplina))
             {
                 json = client.GetAsync("http://localhost:5000/Diciplina/ConsultarTudo")
