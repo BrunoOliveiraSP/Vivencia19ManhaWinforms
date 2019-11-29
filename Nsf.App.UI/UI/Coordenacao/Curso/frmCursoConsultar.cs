@@ -9,6 +9,7 @@ namespace Nsf.App.UI
         public frmCursoConsultar()
         {
             InitializeComponent();
+            CarregarGrid();
         }
 
         private void txtCurso_TextChanged(object sender, EventArgs e)
