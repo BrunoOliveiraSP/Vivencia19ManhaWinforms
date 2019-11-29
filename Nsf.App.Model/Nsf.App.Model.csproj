@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exemplo\ExemploModel.cs" />
-    <Compile Include="Model\ProfessorModel.cs" />
+    <Compile Include="AnoLetivoModel.cs" />
+    <Compile Include="ProfessorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
