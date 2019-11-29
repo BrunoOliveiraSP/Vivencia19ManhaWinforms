@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nsf.App.Model.Models
+namespace Nsf.App.Model
 {
-    class ProfessorModel
+    public class ProfessorModel
     {
-
         public int IdProfessor { get; set; }
 
         public int IdLogin { get; set; }
@@ -25,7 +24,9 @@ namespace Nsf.App.Model.Models
 
         public string DsEmail { get; set; }
 
+
         public string DsCvLattes { get; set; }
+
 
         public int NrAnoPrimeiroEmprego { get; set; }
 
@@ -48,12 +49,9 @@ namespace Nsf.App.Model.Models
         public string DsFaculdade { get; set; }
 
         public string DsCurso { get; set; }
-        
+
         public DateTime DtFaculdadeInicio { get; set; }
 
         public DateTime DtFaculdadeFim { get; set; }
-
-
-
     }
 }
