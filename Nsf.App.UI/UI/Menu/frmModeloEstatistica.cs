@@ -14,5 +14,9 @@ namespace Nsf.App.UI
         {
         }
 
+        private void label14_Click(object sender, System.EventArgs e)
+        {
+            frmInicial.Current.OpenScreen(new frmExemploConsultar());
+        }
     }
 }
