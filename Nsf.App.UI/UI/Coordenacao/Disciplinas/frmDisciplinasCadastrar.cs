@@ -16,16 +16,27 @@ namespace Nsf.App.UI
         {
             try
             {
-                DiciplinaModel model = new DiciplinaModel();
-                model.NmDisciplina = txtDisciplina.Text;
-                model.DsSigla = txtSigla.Text;
-                model.BtAtivo = Convert.ToUInt64(chkAtivo.Checked);
-                //falta so colocar data de inclusao
+                int OqueFazer = int.Parse(lblId.Text);
 
-                API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
-                api.Inserir(model);
+                if (OqueFazer == 0)
+                {
+                    DiciplinaModel model = new DiciplinaModel();
+                    model.NmDisciplina = txtDisciplina.Text;
+                    model.DsSigla = txtSigla.Text;
+                    model.BtAtivo = Convert.ToUInt64(chkAtivo.Checked);
+                    //falta so colocar data de inclusao
 
-                MessageBox.Show("Diciplina inserida");
+                    API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
+                    api.Inserir(model);
+
+                    MessageBox.Show("Diciplina inserida");
+                }
+                else
+                {
+                    //função de alterar (AQUi)
+                }
+
+                
             }
             catch (Exception ex)
             {
