@@ -49,6 +49,7 @@
     <Compile Include="ProfessorDisciplinaModel.cs" />
     <Compile Include="ProfessorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TurmaModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
