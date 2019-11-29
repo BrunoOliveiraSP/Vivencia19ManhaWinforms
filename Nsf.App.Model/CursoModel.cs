@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nsf.App.Model
 {
-    public class CursoModel
+    public partial class CursoModel
     {
         public int IdCurso { get; set; }
 
