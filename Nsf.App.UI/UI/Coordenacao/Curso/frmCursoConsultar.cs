@@ -10,5 +10,9 @@ namespace Nsf.App.UI
             InitializeComponent();
         }
 
+        private void txtCurso_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
