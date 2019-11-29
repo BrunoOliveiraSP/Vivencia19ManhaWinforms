@@ -78,3 +78,6 @@ C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.UI\obj\Debug\Nsf.App
 C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.UI\obj\Debug\Nsf.App.UI.frmSalaConsultar.resources
 C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.UI\obj\Debug\Nsf.App.UI.frmSalaCadastrar.resources
 C:\Users\bruno\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.UI\obj\Debug\Nsf.App.UI.csproj.GenerateResource.cache
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.UI\obj\Debug\Nsf.App.UI.csproj.Nsf.App.UI.exe.config
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.UI\obj\Debug\Nsf.App.UI.frmExemploConsultar.resources
+C:\Users\teste\Source\Repos\Vivencia19ManhaWinforms\Nsf.App.UI\obj\Debug\Nsf.App.UI.frmExemploCadastrar.resources
