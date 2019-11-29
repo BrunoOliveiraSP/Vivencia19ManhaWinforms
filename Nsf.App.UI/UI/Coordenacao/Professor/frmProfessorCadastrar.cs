@@ -38,8 +38,7 @@ namespace Nsf.App.UI
             prof.IdLogin = Convert.ToInt32(txtLogin.Text);
             prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
             prof.TpContratacao = cboContrato.Text;
-
-
+            
             Nsf.App.API.Client.ProfessorApi Api = new API.Client.ProfessorApi();
             Api.Inserir(prof);
 
