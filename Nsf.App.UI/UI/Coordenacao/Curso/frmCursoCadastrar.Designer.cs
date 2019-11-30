@@ -215,6 +215,7 @@
             this.chkAtivo.TabIndex = 4;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
+            this.chkAtivo.CheckedChanged += new System.EventHandler(this.chkAtivo_CheckedChanged);
             // 
             // nudCapacidade
             // 

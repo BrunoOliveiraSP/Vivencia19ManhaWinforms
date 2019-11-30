@@ -31,14 +31,17 @@ namespace Nsf.App.UI
 
         private void dgvAnosLetivos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 4)
+            if (e.ColumnIndex == 4)
             {
                 Model.AnoLetivoModel model = dgvAnosLetivos.CurrentRow.DataBoundItem as Model.AnoLetivoModel;
 
                 Nsf.App.UI.frmAnoLetivoCadastrar tela = new frmAnoLetivoCadastrar();
+
                 tela.CarregarTela(model);
 
-                tela.Show();
+                frmInicial.Current.OpenScreen(tela);
+
+                Hide();
             }
 
             if (e.ColumnIndex == 5)
