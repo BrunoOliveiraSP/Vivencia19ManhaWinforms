@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace Nsf.App.UI
 {
+
     public partial class frmAnoLetivoCadastrar : NsfUserScreen
     {
         public frmAnoLetivoCadastrar()
@@ -28,6 +29,7 @@ namespace Nsf.App.UI
         }
 
         Nsf.App.Model.AnoLetivoModel model = new Model.AnoLetivoModel();
+        
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
@@ -87,6 +89,23 @@ namespace Nsf.App.UI
 
             dgvTurma.AutoGenerateColumns = false;
             dgvTurma.DataSource = turma;
+        }
+
+        private void dgvTurma_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 4)
+            {
+                Model.TurmaModel turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaModel;
+
+                cboTurmaPeriodo.Text = turma.TpPeriodo;
+                txtTurmaNome.Text = turma.NmTurma;
+                nudTurmaCapacidade.Value = turma.NrCapacidadeMax;
+            }
+        }
+
+        private void btnModuloAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

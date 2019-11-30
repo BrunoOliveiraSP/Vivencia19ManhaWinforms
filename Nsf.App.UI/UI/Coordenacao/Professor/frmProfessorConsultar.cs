@@ -10,6 +10,7 @@ namespace Nsf.App.UI
 		public frmProfessorConsultar()
 		{
 			InitializeComponent();
+            CarregarGrid();
 		}
 
         private void dgvProfessores_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -17,11 +18,13 @@ namespace Nsf.App.UI
             if(e.ColumnIndex == 4)
             {
                 Model.ProfessorModel model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorModel;
+
                 frmProfessorCadastrar tela = new frmProfessorCadastrar();
-                frmInicial.Current.OpenScreen(new frmProfessorCadastrar());
                 tela.CarregaarCampos(model);
+
+                frmInicial.Current.OpenScreen(tela);
+
                 Hide();
-                
             }
 
             if (e.ColumnIndex == 5)
@@ -44,7 +47,7 @@ namespace Nsf.App.UI
 
         private void frmProfessorConsultar_Load(object sender, EventArgs e)
         {
-           // CarregarGrid();
+            CarregarGrid();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -60,8 +63,8 @@ namespace Nsf.App.UI
                     dgvProfessores.AutoGenerateColumns = false;
                     dgvProfessores.DataSource = lista;
                 }
-                
-            CarregarGrid();
+                else
+                    CarregarGrid();
             }
             catch (Exception ex)
             {
@@ -75,6 +78,11 @@ namespace Nsf.App.UI
             List<Model.ProfessorModel> lista = db.ListarTodos();
             dgvProfessores.AutoGenerateColumns = false;
             dgvProfessores.DataSource = lista;
+        }
+
+        private void dgvProfessores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
