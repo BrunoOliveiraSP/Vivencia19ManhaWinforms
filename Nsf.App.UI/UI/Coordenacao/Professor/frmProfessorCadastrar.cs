@@ -122,25 +122,26 @@ namespace Nsf.App.UI
             List<Model.Model.DiciplinaModel> lista = db.ListarDisciplina(a);
             lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
             lbxDisciplinasDisponiveis.DataSource = (lista);
-
-
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Model.Model.DiciplinaModel disciplina = lbxDisciplinasDisponiveis.SelectedItem as Model.Model.DiciplinaModel;
+            
             lbxDisciplinasDoProfessor.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
             lbxDisciplinasDoProfessor.Items.Add(disciplina);
+
+            lbxDisciplinasDisponiveis.Items.RemoveAt(lbxDisciplinasDisponiveis.SelectedIndex);
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            Model.Model.DiciplinaModel disciplina = lbxDisciplinasDoProfessor.SelectedItem as Model.Model.DiciplinaModel;
+
             lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-            lbxDisciplinasDisponiveis.Items.Remove(disciplina);
+            lbxDisciplinasDisponiveis.Items.Add(disciplina);
 
-
-
-
-
-
-
+            lbxDisciplinasDoProfessor.Items.RemoveAt(lbxDisciplinasDoProfessor.SelectedIndex);
         }
     }
 }
