@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="AnoLetivoAPI.cs" />
     <Compile Include="CursoApi.cs" />
+    <Compile Include="CursoDisciplinaAPI.cs" />
     <Compile Include="DisciplinaAPI.cs" />
     <Compile Include="ExemploAPI.cs" />
     <Compile Include="ProfessorApi.cs" />

@@ -18,5 +18,9 @@ namespace Nsf.App.UI
 
         }
 
+        private void chkAtivo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
