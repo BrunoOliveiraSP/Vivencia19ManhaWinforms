@@ -27,5 +27,10 @@ namespace Nsf.App.UI
             dgvProfessores.AutoGenerateColumns = false;
             dgvProfessores.DataSource = lista;
         }
+
+        private void dgvProfessores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
