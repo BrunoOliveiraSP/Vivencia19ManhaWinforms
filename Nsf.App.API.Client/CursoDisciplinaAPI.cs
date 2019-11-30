@@ -10,7 +10,7 @@ namespace Nsf.App.API.Client
 {
     class CursoDisciplinaAPI
     {
-         public void Inserir(Nsf.App.Model.CursoDisciplinaRequest curso)
+         public List<Model.CursoModel>  Consultar(Nsf.App.Model.CursoDisciplinaRequest cursos)
         {
             HttpClient client = new HttpClient();
             string json = client.GetAsync("http://localhost:5000/CursoDisciplina/")
@@ -19,8 +19,8 @@ namespace Nsf.App.API.Client
                                 .ReadAsStringAsync()
                                 .Result;
 
-            List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
-            //return cursos;
+            List<Model.CursoModel> curso = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
+            return curso;
 
         }
     }

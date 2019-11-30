@@ -14,7 +14,11 @@ namespace Nsf.App.API.Client
 
         public void InserirCurso(Nsf.App.Model.CursoModel curso)
         {
-           // string json = 
+            string json = JsonConvert.SerializeObject(curso);
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var resp = client.PostAsync("http://localhost:5000/Curso/", body).Result;
+             
         }
         public List<Model.CursoModel> ListarTodos()
         {
