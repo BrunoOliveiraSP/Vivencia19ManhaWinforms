@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,11 +48,13 @@
   <ItemGroup>
     <Compile Include="AnoLetivoAPI.cs" />
     <Compile Include="CursoApi.cs" />
+    <Compile Include="CursoDisciplinaAPI.cs" />
     <Compile Include="DisciplinaAPI.cs" />
     <Compile Include="ExemploAPI.cs" />
     <Compile Include="ProfessorApi.cs" />
     <Compile Include="ProfessorDisciplinaApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaAPI.cs" />
     <Compile Include="TurmaAPI.cs" />
   </ItemGroup>
   <ItemGroup>

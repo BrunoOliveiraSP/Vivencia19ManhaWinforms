@@ -31,12 +31,14 @@ namespace Nsf.App.UI
             if (e.ColumnIndex == 3)
             {
                 DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
-
+                frmInicial.Current.OpenScreen(new frmDisciplinasCadastrar(diciplina));
+                Hide();
             }
             if (e.ColumnIndex == 4)
             {
                 DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
                 api.Remover(diciplina.IdDisciplina);
+                
             }
         }
 
