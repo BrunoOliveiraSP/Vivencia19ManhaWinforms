@@ -989,6 +989,7 @@
             this.btnAdd.Text = ">>";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lbxDisciplinasDisponiveis
             // 

@@ -11,6 +11,7 @@ namespace Nsf.App.UI
 		public frmProfessorCadastrar()
 		{
 			InitializeComponent();
+            Carregarlbx();
 		}
 
         public void CarregaarCampos(Model.ProfessorModel prof)
@@ -112,6 +113,33 @@ namespace Nsf.App.UI
             }
         }
 
+        public void Carregarlbx()
+        {
+            string a = string.Empty;
 
+            API.Client.DisciplinaAPI db = new API.Client.DisciplinaAPI();
+            List<Model.Model.DiciplinaModel> lista = db.ListarDisciplina(a);
+            lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+            lbxDisciplinasDisponiveis.DataSource = (lista);
+
+
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Model.Model.DiciplinaModel disciplina = lbxDisciplinasDisponiveis.SelectedItem as Model.Model.DiciplinaModel;
+            lbxDisciplinasDoProfessor.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+            lbxDisciplinasDoProfessor.Items.Add(disciplina);
+            lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+            lbxDisciplinasDisponiveis.Items.Remove(disciplina);
+
+
+
+
+
+
+
+        }
     }
 }
