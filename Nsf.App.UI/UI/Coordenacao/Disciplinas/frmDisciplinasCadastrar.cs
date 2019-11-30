@@ -7,24 +7,36 @@ namespace Nsf.App.UI
     public partial class frmDisciplinasCadastrar : NsfUserScreen
     {
 
-        public frmDisciplinasCadastrar()
+        public frmDisciplinasCadastrar(DiciplinaModel diciplina)
         {
             InitializeComponent();
+            carregar(diciplina);
+        }
+
+        public void carregar(DiciplinaModel diciplina)
+        {
+            if (diciplina != null)
+            {
+                txtDisciplina.Text = diciplina.NmDisciplina;
+                txtSigla.Text = diciplina.DsSigla;
+                lblId.Text = diciplina.IdDisciplina.ToString();
+                chkAtivo.Checked = Convert.ToBoolean(diciplina.BtAtivo);
+            }
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                int OqueFazer = int.Parse(lblId.Text);
+                int id = int.Parse(lblId.Text);
+                DiciplinaModel model = new DiciplinaModel();
 
-                if (OqueFazer == 0)
+                if (id == 0)
                 {
-                    DiciplinaModel model = new DiciplinaModel();
                     model.NmDisciplina = txtDisciplina.Text;
                     model.DsSigla = txtSigla.Text;
                     model.BtAtivo = Convert.ToUInt64(chkAtivo.Checked);
-                    //falta so colocar data de inclusao
+                    model.DtInclusao = DateTime.Now;
 
                     API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
                     api.Inserir(model);
@@ -33,14 +45,23 @@ namespace Nsf.App.UI
                 }
                 else
                 {
-                    //função de alterar (AQUi)
+                    model.IdDisciplina = int.Parse(lblId.Text);
+                    model.NmDisciplina = txtDisciplina.Text;
+                    model.DsSigla = txtSigla.Text;
+                    model.BtAtivo = Convert.ToUInt64(chkAtivo.Checked);
+                    model.DtUltimaAlteracao = DateTime.Now;
+
+                    API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
+                    api.Alterar(model);
+
+                    MessageBox.Show("Diciplina Alterada com sucesso!");
                 }
 
                 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro,Tente Novamante");
+                MessageBox.Show($"Erro,Tente Novamante, message de erro:{ex.Message}");
             }
         }
     }

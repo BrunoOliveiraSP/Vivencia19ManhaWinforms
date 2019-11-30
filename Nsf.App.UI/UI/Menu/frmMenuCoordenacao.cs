@@ -44,7 +44,7 @@ namespace Nsf.App.UI
 
         private void lblDisciplinasNovo_Click(object sender, EventArgs e)
         {
-            frmInicial.Current.OpenScreen(new frmDisciplinasCadastrar());
+            frmInicial.Current.OpenScreen(new frmDisciplinasCadastrar(null));
         }
 
         private void lblDisciplinasConsultar_Click(object sender, EventArgs e)
