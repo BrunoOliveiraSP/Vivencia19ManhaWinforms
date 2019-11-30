@@ -18,11 +18,13 @@ namespace Nsf.App.UI
             if(e.ColumnIndex == 4)
             {
                 Model.ProfessorModel model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorModel;
+
                 frmProfessorCadastrar tela = new frmProfessorCadastrar();
-                frmInicial.Current.OpenScreen(new frmProfessorCadastrar());
                 tela.CarregaarCampos(model);
+
+                frmInicial.Current.OpenScreen(tela);
+
                 Hide();
-                
             }
 
             if (e.ColumnIndex == 5)
@@ -76,6 +78,11 @@ namespace Nsf.App.UI
             List<Model.ProfessorModel> lista = db.ListarTodos();
             dgvProfessores.AutoGenerateColumns = false;
             dgvProfessores.DataSource = lista;
+        }
+
+        private void dgvProfessores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

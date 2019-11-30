@@ -13,6 +13,32 @@ namespace Nsf.App.UI
 			InitializeComponent();
 		}
 
+        public void CarregaarCampos(Model.ProfessorModel prof)
+        {
+            lblId.Text = prof.IdProfessor.ToString();
+            txtNome.Text = prof.NmProfessor;
+            txtPai.Text = prof.NmPai;
+            txtMae.Text = prof.NmMae;
+            chkAtivo.Checked = prof.BtAtivo;
+            txtCelular.Text = prof.DsCelular;
+            txtCpf.Text = prof.DsCpf;
+            txtCurso.Text = prof.DsCurso;
+            txtCvLattes.Text = prof.DsCvLattes;
+            txtEmail.Text = prof.DsEmail;
+            txtEstadoNasc.Text = prof.DsEstado;
+            txtFaculdade.Text = prof.DsFaculdade;
+            txtRG.Text = prof.DsRg;
+            txtRGEmissao.Text = prof.DsRgEmissor;
+            txtRGOrgao.Text = prof.DsRgOrgao;
+            txtTelefone.Text = prof.DsTelefone;
+            dtpFaculdadeFim.Value = prof.DtFaculdadeFim;
+            dtpFaculdadeInicio.Value = prof.DtFaculdadeInicio;
+            dtpNascimento.Value = prof.DtNascimento;
+            txtLogin.Text = prof.IdLogin.ToString();
+            nudPrimeiroEmprego.Value = prof.NrAnoPrimeiroEmprego;
+            cboContrato.Text = prof.TpContratacao;
+        }
+
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
@@ -86,30 +112,6 @@ namespace Nsf.App.UI
             }
         }
 
-        public void CarregaarCampos (Model.ProfessorModel prof)
-        {
-            lblId.Text = prof.IdProfessor.ToString();
-            txtNome.Text =  prof.NmProfessor;
-            txtPai.Text = prof.NmPai;
-            txtNome.Text = prof.NmMae;
-            chkAtivo.Checked = prof.BtAtivo;
-            txtCelular.Text = prof.DsCelular;
-            txtCpf.Text = prof.DsCpf;
-            txtCurso.Text = prof.DsCurso;
-            txtCvLattes.Text = prof.DsCvLattes;
-            txtEmail.Text = prof.DsEmail;
-            txtEstadoNasc.Text = prof.DsEstado;
-            txtFaculdade.Text = prof.DsFaculdade;
-            txtRG.Text = prof.DsRg;
-            txtRGEmissao.Text = prof.DsRgEmissor;
-            txtRGOrgao.Text = prof.DsRgOrgao;
-            txtTelefone.Text = prof.DsTelefone;
-            dtpFaculdadeFim.Value = prof.DtFaculdadeFim;
-            dtpFaculdadeInicio.Value = prof.DtFaculdadeInicio;
-            dtpNascimento.Value = prof.DtNascimento;
-            txtLogin.Text = prof.IdLogin.ToString();
-            nudPrimeiroEmprego.Value = prof.NrAnoPrimeiroEmprego;
-            cboContrato.Text = prof.TpContratacao;
-        }
+
     }
 }
