@@ -10,10 +10,14 @@ namespace Nsf.App.API.Client
 {
     public class CursoApi
     {
+        HttpClient client = new HttpClient();
+
+        public void InserirCurso(Nsf.App.Model.CursoModel curso)
+        {
+           // string json = 
+        }
         public List<Model.CursoModel> ListarTodos()
         {
-            HttpClient client = new HttpClient();
-
             string json = client.GetAsync("http://localhost:5000/Curso/")
                                 .Result
                                 .Content
@@ -26,8 +30,6 @@ namespace Nsf.App.API.Client
 
         public List<Model.CursoModel> ConsultarPorNome(string nome)
         {
-            HttpClient client = new HttpClient();
-
             string json = client.GetAsync("http://localhost:5000/Curso/nome" + nome)
                                 .Result
                                 .Content
@@ -40,7 +42,6 @@ namespace Nsf.App.API.Client
 
         public void Remover(int id)
         {
-            HttpClient client = new HttpClient();
             var resp = client.DeleteAsync("http://localhost:5000/Curso/" + id).Result;
         }
     }
