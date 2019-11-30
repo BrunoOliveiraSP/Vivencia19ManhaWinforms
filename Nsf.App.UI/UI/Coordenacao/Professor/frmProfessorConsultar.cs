@@ -10,6 +10,7 @@ namespace Nsf.App.UI
 		public frmProfessorConsultar()
 		{
 			InitializeComponent();
+            CarregarGrid();
 		}
 
         private void dgvProfessores_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -44,7 +45,7 @@ namespace Nsf.App.UI
 
         private void frmProfessorConsultar_Load(object sender, EventArgs e)
         {
-           // CarregarGrid();
+            CarregarGrid();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -60,8 +61,8 @@ namespace Nsf.App.UI
                     dgvProfessores.AutoGenerateColumns = false;
                     dgvProfessores.DataSource = lista;
                 }
-                
-            CarregarGrid();
+                else
+                    CarregarGrid();
             }
             catch (Exception ex)
             {
