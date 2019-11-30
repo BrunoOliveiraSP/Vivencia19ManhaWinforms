@@ -28,6 +28,8 @@ namespace Nsf.App.UI
         {
             try
             {
+
+                //
                 int id = int.Parse(lblId.Text);
                 DiciplinaModel model = new DiciplinaModel();
 
