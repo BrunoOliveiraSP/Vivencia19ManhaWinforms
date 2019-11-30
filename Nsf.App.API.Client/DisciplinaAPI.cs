@@ -63,6 +63,7 @@ namespace Nsf.App.API.Client
         {
             try
             {
+
                 string json = JsonConvert.SerializeObject(diciplina);
 
                 StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
