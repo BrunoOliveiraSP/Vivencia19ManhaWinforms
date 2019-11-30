@@ -15,6 +15,7 @@ namespace Nsf.App.UI
 
         public void CarregaarCampos(Model.ProfessorModel prof)
         {
+            panelId.Visible = true;
             lblId.Text = prof.IdProfessor.ToString();
             txtNome.Text = prof.NmProfessor;
             txtPai.Text = prof.NmPai;
@@ -47,7 +48,7 @@ namespace Nsf.App.UI
 
                 if (Convert.ToInt32(lblId.Text) != 0)
                 {
-                    lblId.Visible = true;
+
                     prof.IdProfessor = Convert.ToInt32(lblId.Text);
                     prof.NmProfessor = txtNome.Text;
                     prof.NmPai = txtPai.Text;
