@@ -31,5 +31,39 @@ namespace Nsf.App.API.Client
             List<TurmaModel> turma = JsonConvert.DeserializeObject<List<TurmaModel>>(json);
             return turma;
         }
+        public void Alterar(Nsf.App.Model.TurmaModel model)
+        {
+            HttpClient client = new HttpClient();
+
+            string json = JsonConvert.SerializeObject(model);
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var resp = client.PutAsync("http://localhost:5000/Turma", body).Result;
+
+            if (resp.IsSuccessStatusCode == false)
+            {
+                string jsonResposta = resp.Content
+                                          .ReadAsStringAsync()
+                                          .Result;
+
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new ArgumentException(erro.Mensagem);
+            }
+        }
+        public void Remover(int id)
+        {
+            HttpClient client = new HttpClient();
+            var resp = client.DeleteAsync("http://localhost:5000/Turma" + id).Result;
+
+            if (resp.IsSuccessStatusCode == false)
+            {
+                string jsonResposta = resp.Content
+                                          .ReadAsStringAsync()
+                                          .Result;
+
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new ArgumentException(erro.Mensagem);
+            }
+        }
     }
 }

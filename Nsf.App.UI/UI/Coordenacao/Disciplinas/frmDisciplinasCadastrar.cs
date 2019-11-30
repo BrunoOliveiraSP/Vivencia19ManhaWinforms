@@ -40,7 +40,7 @@ namespace Nsf.App.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro,Tente Novamante");
+                MessageBox.Show(ex.Message);
             }
         }
     }
