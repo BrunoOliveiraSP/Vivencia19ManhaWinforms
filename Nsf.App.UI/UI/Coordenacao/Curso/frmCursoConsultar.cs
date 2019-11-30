@@ -14,8 +14,14 @@ namespace Nsf.App.UI
 
         private void txtCurso_TextChanged(object sender, EventArgs e)
         {
+            string cursoNome = txtCurso.Text;
 
+            API.Client.CursoApi api = new API.Client.CursoApi();
+       
+            List<Model.CursoModel> cursos = api.ConsultarPorNome(cursoNome);
 
+            dgvCursos.AutoGenerateColumns = false;
+            dgvCursos.DataSource = cursos;
         }
 
         public void CarregarGrid()
@@ -39,7 +45,10 @@ namespace Nsf.App.UI
                     API.Client.CursoApi api = new API.Client.CursoApi();
                     api.Remover(curso.IdCurso);
                 }
+
+                CarregarGrid();
+
             }
-            }
+         }
     }
 }

@@ -100,14 +100,14 @@
             // Nome
             // 
             this.Nome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Nome.DataPropertyName = "nm_professor";
+            this.Nome.DataPropertyName = "NmProfessor";
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
             this.Nome.ReadOnly = true;
             // 
             // Telefone
             // 
-            this.Telefone.DataPropertyName = "ds_telefone";
+            this.Telefone.DataPropertyName = "DsTelefone";
             this.Telefone.HeaderText = "Telefone";
             this.Telefone.Name = "Telefone";
             this.Telefone.ReadOnly = true;
@@ -115,7 +115,7 @@
             // 
             // Email
             // 
-            this.Email.DataPropertyName = "ds_email";
+            this.Email.DataPropertyName = "DsEmail";
             this.Email.HeaderText = "Email";
             this.Email.Name = "Email";
             this.Email.ReadOnly = true;
@@ -123,7 +123,7 @@
             // 
             // Column3
             // 
-            this.Column3.DataPropertyName = "bt_ativo";
+            this.Column3.DataPropertyName = "BtAtivo";
             this.Column3.HeaderText = "Ativo";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -170,6 +170,7 @@
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(568, 27);
             this.txtNome.TabIndex = 0;
+            this.txtNome.TextChanged += new System.EventHandler(this.txtNome_TextChanged);
             // 
             // frmProfessorConsultar
             // 
