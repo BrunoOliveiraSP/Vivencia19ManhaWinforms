@@ -46,13 +46,25 @@ namespace Nsf.App.UI
                         api.Deletar(modelo.idSala);
                         MessageBox.Show("Sala deletada com sucesso");
 
+                        string instituicao = txtInstituicao.Text.Trim();
+                        txtInstituicao.Text.Trim();
+
+
                         dgvSalas.AutoGenerateColumns = false;
 
-                        if (txtInstituicao.Text == string.Empty)
+                        if (instituicao == string.Empty)
                             dgvSalas.DataSource = api.ListarTodos();
                         else
-                            dgvSalas.DataSource = api.ListarPorLocal(txtInstituicao.Text);
+                            dgvSalas.DataSource = api.ListarPorLocal(instituicao);
                     }
+                }
+                else if(e.ColumnIndex == 4)
+                {
+                    Nsf.App.Model.SalaModel modelo = dgvSalas.CurrentRow.DataBoundItem as Nsf.App.Model.SalaModel;
+                    UI.frmSalaCadastrar sala = new frmSalaCadastrar();
+
+                    sala.CarregarSala(modelo);
+                    frmInicial.Current.OpenScreen(sala);
                 }
            
             }

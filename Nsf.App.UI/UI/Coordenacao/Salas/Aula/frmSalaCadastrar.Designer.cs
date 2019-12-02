@@ -55,7 +55,7 @@
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(51)))), ((int)(((byte)(142)))));
             this.label5.Location = new System.Drawing.Point(48, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(265, 37);
+            this.label5.Size = new System.Drawing.Size(322, 44);
             this.label5.TabIndex = 5;
             this.label5.Text = "  Cadastrar Sala  ";
             // 
@@ -79,7 +79,7 @@
             "Calhim"});
             this.cboInstituicao.Location = new System.Drawing.Point(250, 240);
             this.cboInstituicao.Name = "cboInstituicao";
-            this.cboInstituicao.Size = new System.Drawing.Size(388, 29);
+            this.cboInstituicao.Size = new System.Drawing.Size(388, 31);
             this.cboInstituicao.TabIndex = 0;
             this.cboInstituicao.SelectedIndexChanged += new System.EventHandler(this.cboInstituicao_SelectedIndexChanged);
             // 
@@ -100,7 +100,7 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(16, 7);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(28, 19);
+            this.label3.Size = new System.Drawing.Size(35, 23);
             this.label3.TabIndex = 155;
             this.label3.Text = "Id:";
             // 
@@ -111,7 +111,7 @@
             this.lblId.ForeColor = System.Drawing.Color.Black;
             this.lblId.Location = new System.Drawing.Point(60, 7);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(21, 22);
+            this.lblId.Size = new System.Drawing.Size(26, 30);
             this.lblId.TabIndex = 156;
             this.lblId.Text = "0";
             // 
@@ -123,7 +123,7 @@
             this.chkAtivo.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.chkAtivo.Location = new System.Drawing.Point(249, 308);
             this.chkAtivo.Name = "chkAtivo";
-            this.chkAtivo.Size = new System.Drawing.Size(72, 25);
+            this.chkAtivo.Size = new System.Drawing.Size(83, 27);
             this.chkAtivo.TabIndex = 3;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
@@ -149,7 +149,7 @@
             0,
             0});
             this.nudCapacidade.Name = "nudCapacidade";
-            this.nudCapacidade.Size = new System.Drawing.Size(50, 27);
+            this.nudCapacidade.Size = new System.Drawing.Size(50, 32);
             this.nudCapacidade.TabIndex = 2;
             this.nudCapacidade.Value = new decimal(new int[] {
             50,
@@ -165,7 +165,7 @@
             this.txtSala.Location = new System.Drawing.Point(249, 275);
             this.txtSala.MaxLength = 50;
             this.txtSala.Name = "txtSala";
-            this.txtSala.Size = new System.Drawing.Size(195, 27);
+            this.txtSala.Size = new System.Drawing.Size(195, 32);
             this.txtSala.TabIndex = 1;
             // 
             // label31
@@ -175,7 +175,7 @@
             this.label31.ForeColor = System.Drawing.Color.Black;
             this.label31.Location = new System.Drawing.Point(183, 280);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(47, 19);
+            this.label31.Size = new System.Drawing.Size(57, 23);
             this.label31.TabIndex = 185;
             this.label31.Text = "Sala:";
             // 
@@ -186,7 +186,7 @@
             this.label1.ForeColor = System.Drawing.Color.Salmon;
             this.label1.Location = new System.Drawing.Point(564, 277);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 19);
+            this.label1.Size = new System.Drawing.Size(19, 23);
             this.label1.TabIndex = 187;
             this.label1.Text = "*";
             // 
@@ -197,7 +197,7 @@
             this.label33.ForeColor = System.Drawing.Color.Salmon;
             this.label33.Location = new System.Drawing.Point(225, 279);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(16, 19);
+            this.label33.Size = new System.Drawing.Size(19, 23);
             this.label33.TabIndex = 188;
             this.label33.Text = "*";
             // 
@@ -208,7 +208,7 @@
             this.label17.ForeColor = System.Drawing.Color.Salmon;
             this.label17.Location = new System.Drawing.Point(225, 242);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(16, 19);
+            this.label17.Size = new System.Drawing.Size(19, 23);
             this.label17.TabIndex = 184;
             this.label17.Text = "*";
             // 
@@ -226,6 +226,7 @@
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalvar.UseVisualStyleBackColor = false;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // label18
             // 
@@ -234,7 +235,7 @@
             this.label18.ForeColor = System.Drawing.Color.Black;
             this.label18.Location = new System.Drawing.Point(140, 242);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(90, 19);
+            this.label18.Size = new System.Drawing.Size(116, 23);
             this.label18.TabIndex = 183;
             this.label18.Text = "Instituição:";
             // 
@@ -245,7 +246,7 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(450, 280);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 19);
+            this.label2.Size = new System.Drawing.Size(141, 23);
             this.label2.TabIndex = 186;
             this.label2.Text = "Capacidade:";
             // 
