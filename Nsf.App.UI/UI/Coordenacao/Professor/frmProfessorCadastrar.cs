@@ -153,5 +153,13 @@ namespace Nsf.App.UI
                 lbxDisciplinasDoProfessor.Items.RemoveAt(lbxDisciplinasDoProfessor.SelectedIndex);
             }
         }
+
+        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
