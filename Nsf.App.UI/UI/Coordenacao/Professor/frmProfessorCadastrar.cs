@@ -41,37 +41,55 @@ namespace Nsf.App.UI
             cboContrato.Text = prof.TpContratacao;
         }
 
+        private Model.ProfessorModel DadosProfessor()
+        {
+            Model.ProfessorModel prof = new Model.ProfessorModel();
+
+            prof.NmProfessor = txtNome.Text;
+            prof.NmPai = txtPai.Text;
+            prof.NmMae = txtMae.Text;
+            prof.BtAtivo = chkAtivo.Checked;
+            prof.DsCelular = txtCelular.Text;
+            prof.DsCpf = txtCpf.Text;
+            prof.DsCurso = txtCurso.Text;
+            prof.DsCvLattes = txtCvLattes.Text;
+            prof.DsEmail = txtEmail.Text;
+            prof.DsEstado = txtEstadoNasc.Text;
+            prof.DsFaculdade = txtFaculdade.Text;
+            prof.DsRg = txtRG.Text;
+            prof.DsRgEmissor = txtRGEmissao.Text;
+            prof.DsRgOrgao = txtRGOrgao.Text;
+            prof.DsTelefone = txtTelefone.Text;
+            prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
+            prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
+            prof.DtNascimento = dtpNascimento.Value;
+            prof.IdLogin = Convert.ToInt32(txtLogin.Text);
+            prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
+            prof.TpContratacao = cboContrato.Text;
+
+            return prof;
+        }
+
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                Model.ProfessorModel prof = new Model.ProfessorModel();
-
                 if (Convert.ToInt32(lblId.Text) != 0)
                 {
+                    List<Model.ProfessorRequest> request = new List<Model.ProfessorRequest>();
 
+                    List<Model.Model.DiciplinaModel> disciplina = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
+                    Model.ProfessorModel prof = DadosProfessor();
                     prof.IdProfessor = Convert.ToInt32(lblId.Text);
-                    prof.NmProfessor = txtNome.Text;
-                    prof.NmPai = txtPai.Text;
-                    prof.NmMae = txtNome.Text;
-                    prof.BtAtivo = chkAtivo.Checked;
-                    prof.DsCelular = txtCelular.Text;
-                    prof.DsCpf = txtCpf.Text;
-                    prof.DsCurso = txtCurso.Text;
-                    prof.DsCvLattes = txtCvLattes.Text;
-                    prof.DsEmail = txtEmail.Text;
-                    prof.DsEstado = txtEstadoNasc.Text;
-                    prof.DsFaculdade = txtFaculdade.Text;
-                    prof.DsRg = txtRG.Text;
-                    prof.DsRgEmissor = txtRGEmissao.Text;
-                    prof.DsRgOrgao = txtRGOrgao.Text;
-                    prof.DsTelefone = txtTelefone.Text;
-                    prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
-                    prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
-                    prof.DtNascimento = dtpNascimento.Value;
-                    prof.IdLogin = Convert.ToInt32(txtLogin.Text);
-                    prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
-                    prof.TpContratacao = cboContrato.Text;
+
+                    foreach (Model.Model.DiciplinaModel item in disciplina)
+                    {
+                        Model.ProfessorRequest req = new Model.ProfessorRequest();
+                        req.Disciplina = item;
+                        req.Professor = prof;
+
+                        request.Add(req);
+                    }
 
                     API.Client.ProfessorApi api = new API.Client.ProfessorApi();
                     api.Alterar(prof);
@@ -80,27 +98,19 @@ namespace Nsf.App.UI
                 }
                 else
                 {
-                    prof.NmProfessor = txtNome.Text;
-                    prof.NmPai = txtPai.Text;
-                    prof.NmMae = txtMae.Text;
-                    prof.BtAtivo = chkAtivo.Checked;
-                    prof.DsCelular = txtCelular.Text;
-                    prof.DsCpf = txtCpf.Text;
-                    prof.DsCurso = txtCurso.Text;
-                    prof.DsCvLattes = txtCvLattes.Text;
-                    prof.DsEmail = txtEmail.Text;
-                    prof.DsEstado = txtEstadoNasc.Text;
-                    prof.DsFaculdade = txtFaculdade.Text;
-                    prof.DsRg = txtRG.Text;
-                    prof.DsRgEmissor = txtRGEmissao.Text;
-                    prof.DsRgOrgao = txtRGOrgao.Text;
-                    prof.DsTelefone = txtTelefone.Text;
-                    prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
-                    prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
-                    prof.DtNascimento = dtpNascimento.Value;
-                    prof.IdLogin = Convert.ToInt32(txtLogin.Text);
-                    prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
-                    prof.TpContratacao = cboContrato.Text;
+                    List<Model.ProfessorRequest> request = new List<Model.ProfessorRequest>();
+
+                    List<Model.Model.DiciplinaModel> disciplina = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
+                    Model.ProfessorModel prof = DadosProfessor();
+
+                    foreach (Model.Model.DiciplinaModel item in disciplina)
+                    {
+                        Model.ProfessorRequest req = new Model.ProfessorRequest();
+                        req.Disciplina = item;
+                        req.Professor = prof;
+
+                        request.Add(req);
+                    }
 
                     API.Client.ProfessorApi Api = new API.Client.ProfessorApi();
                     Api.Inserir(prof);

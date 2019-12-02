@@ -71,5 +71,14 @@ namespace Nsf.App.API.Client
 
             return list;
         }
+
+        public List<Model.ProfessorDisciplinaModel> ListarPorIdProfessor(int id)
+        {
+            string json = client.GetAsync("http://localhost:5000/ProfessorDisciplina/idprofessor/" + id).Result.Content.ReadAsStringAsync().Result;
+
+            List<Model.ProfessorDisciplinaModel> list = JsonConvert.DeserializeObject<List<Model.ProfessorDisciplinaModel>>(json);
+
+            return list;
+        }
     }
 }
