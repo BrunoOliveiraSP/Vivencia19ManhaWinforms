@@ -53,7 +53,7 @@ namespace Nsf.App.API.Client
         public void Remover(int id)
         {
             HttpClient client = new HttpClient();
-            var resp = client.DeleteAsync("http://localhost:5000/Turma" + id).Result;
+            var resp = client.DeleteAsync("http://localhost:5000/Turma/" + id).Result;
 
             if (resp.IsSuccessStatusCode == false)
             {

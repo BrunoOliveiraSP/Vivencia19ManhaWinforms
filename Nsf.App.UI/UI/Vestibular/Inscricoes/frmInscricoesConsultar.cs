@@ -11,5 +11,14 @@ namespace Nsf.App.UI
 			InitializeComponent();
 		}
 
-	}
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboAnoLetivo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

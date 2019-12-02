@@ -40,6 +40,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
+            this.frmMatriculaConsultar1 = new Nsf.App.UI.frmMatriculaConsultar();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfessores)).BeginInit();
             this.SuspendLayout();
             // 
@@ -172,10 +173,21 @@
             this.txtNome.TabIndex = 0;
             this.txtNome.TextChanged += new System.EventHandler(this.txtNome_TextChanged);
             // 
+            // frmMatriculaConsultar1
+            // 
+            this.frmMatriculaConsultar1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.frmMatriculaConsultar1.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.frmMatriculaConsultar1.ForeColor = System.Drawing.Color.Black;
+            this.frmMatriculaConsultar1.Location = new System.Drawing.Point(346, 278);
+            this.frmMatriculaConsultar1.Name = "frmMatriculaConsultar1";
+            this.frmMatriculaConsultar1.Size = new System.Drawing.Size(27, 126);
+            this.frmMatriculaConsultar1.TabIndex = 163;
+            // 
             // frmProfessorConsultar
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.frmMatriculaConsultar1);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvProfessores);
@@ -204,5 +216,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
         private System.Windows.Forms.DataGridViewImageColumn Column2;
         private System.Windows.Forms.DataGridViewImageColumn Column1;
+        private frmMatriculaConsultar frmMatriculaConsultar1;
     }
 }

@@ -11,6 +11,7 @@ namespace Nsf.App.UI
 		public frmProfessorCadastrar()
 		{
 			InitializeComponent();
+            Carregarlbx();
 		}
 
         public void CarregaarCampos(Model.ProfessorModel prof)
@@ -113,6 +114,44 @@ namespace Nsf.App.UI
             }
         }
 
+        public void Carregarlbx()
+        {
+            string a = string.Empty;
 
+            API.Client.DisciplinaAPI db = new API.Client.DisciplinaAPI();
+            List<Model.Model.DiciplinaModel> lista = db.ListarDisciplina(a);
+            lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+            foreach (Model.Model.DiciplinaModel item in lista)
+            {
+                lbxDisciplinasDisponiveis.Items.Add(item);
+            }
+            
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if(lbxDisciplinasDisponiveis.SelectedItem != null)
+            {
+                Model.Model.DiciplinaModel disciplina = lbxDisciplinasDisponiveis.SelectedItem as Model.Model.DiciplinaModel;
+
+                lbxDisciplinasDoProfessor.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+                lbxDisciplinasDoProfessor.Items.Add(disciplina);
+
+                lbxDisciplinasDisponiveis.Items.RemoveAt(lbxDisciplinasDisponiveis.SelectedIndex);
+            }
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (lbxDisciplinasDoProfessor.SelectedItem != null)
+            {
+                Model.Model.DiciplinaModel disciplina = lbxDisciplinasDoProfessor.SelectedItem as Model.Model.DiciplinaModel;
+
+                lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+                lbxDisciplinasDisponiveis.Items.Add(disciplina);
+
+                lbxDisciplinasDoProfessor.Items.RemoveAt(lbxDisciplinasDoProfessor.SelectedIndex);
+            }
+        }
     }
 }

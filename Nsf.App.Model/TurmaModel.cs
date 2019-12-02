@@ -8,12 +8,11 @@ namespace Nsf.App.Model
 {
     public partial class TurmaModel
     {
-            public int IdTurma { get; set; }
-            public int IdCurso { get; set; }
-            public int IdAnoLetivo { get; set; }
-            public string NmTurma { get; set; }
-            public string TpPeriodo { get; set; }
-            public int NrCapacidadeMax { get; set; }
-    
+        public int IdTurma { get; set; }
+        public int IdCurso { get; set; }
+        public int IdAnoLetivo { get; set; }
+        public string NmTurma { get; set; }
+        public string TpPeriodo { get; set; }
+        public int NrCapacidadeMax { get; set; }
     }
 }
