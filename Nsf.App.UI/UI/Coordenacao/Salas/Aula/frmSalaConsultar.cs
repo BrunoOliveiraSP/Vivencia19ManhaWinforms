@@ -17,7 +17,7 @@ namespace Nsf.App.UI
             try
             {
                 string instituicao = txtInstituicao.Text.Trim();
-                txtInstituicao.Text.Trim();
+                txtInstituicao.Text = instituicao;
                 
 
                 dgvSalas.AutoGenerateColumns = false;
@@ -47,7 +47,7 @@ namespace Nsf.App.UI
                         MessageBox.Show("Sala deletada com sucesso");
 
                         string instituicao = txtInstituicao.Text.Trim();
-                        txtInstituicao.Text.Trim();
+                        txtInstituicao.Text = instituicao;
 
 
                         dgvSalas.AutoGenerateColumns = false;

@@ -5,7 +5,7 @@ namespace Nsf.App.UI
 {
 	public partial class frmSalaCadastrar : NsfUserScreen
 	{
-        string operacao;
+        string operacao = "Inserir";
         Model.SalaModel modeloSala = new Model.SalaModel();
         API.Client.SalaAPI api = new API.Client.SalaAPI();
 
