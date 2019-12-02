@@ -55,6 +55,7 @@
     <Compile Include="ProfessorDisciplinaApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalaAPI.cs" />
+    <Compile Include="SalaVestibularAPI.cs" />
     <Compile Include="TurmaAPI.cs" />
   </ItemGroup>
   <ItemGroup>
