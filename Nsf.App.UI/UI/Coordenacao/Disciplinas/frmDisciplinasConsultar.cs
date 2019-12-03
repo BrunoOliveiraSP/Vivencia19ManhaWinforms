@@ -38,7 +38,10 @@ namespace Nsf.App.UI
             {
                 DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
                 api.Remover(diciplina.IdDisciplina);
-                
+                dgvDisciplinas.RefreshEdit();
+
+
+
             }
         }
 

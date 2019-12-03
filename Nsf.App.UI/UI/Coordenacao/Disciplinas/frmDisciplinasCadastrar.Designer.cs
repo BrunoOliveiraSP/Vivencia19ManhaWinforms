@@ -170,7 +170,7 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(73, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(28, 19);
+            this.label3.Size = new System.Drawing.Size(19, 19);
             this.label3.TabIndex = 155;
             this.label3.Text = "Id:";
             // 
@@ -179,9 +179,9 @@
             this.lblId.AutoSize = true;
             this.lblId.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.lblId.ForeColor = System.Drawing.Color.Black;
-            this.lblId.Location = new System.Drawing.Point(141, 7);
+            this.lblId.Location = new System.Drawing.Point(148, 7);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(19, 21);
+            this.lblId.Size = new System.Drawing.Size(9, 21);
             this.lblId.TabIndex = 156;
             this.lblId.Text = "0";
             // 
