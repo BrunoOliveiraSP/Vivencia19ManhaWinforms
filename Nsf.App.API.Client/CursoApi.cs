@@ -34,7 +34,7 @@ namespace Nsf.App.API.Client
 
         public List<Model.CursoModel> ConsultarPorNome(string nome)
         {
-            string json = client.GetAsync("http://localhost:5000/Curso/nome" + nome)
+            string json = client.GetAsync("http://localhost:5000/Curso/ConsultarPorNome/" + nome)
                                 .Result
                                 .Content
                                 .ReadAsStringAsync()
@@ -47,6 +47,18 @@ namespace Nsf.App.API.Client
         public void Remover(int id)
         {
             var resp = client.DeleteAsync("http://localhost:5000/Curso/" + id).Result;
+        }
+
+        public List<Model.CursoModel> ConsultarPorSigla(string sigla)
+        {
+            string json = client.GetAsync("http://localhost:5000/Curso/ConsultarPorSigla/" + sigla)
+                                .Result
+                                .Content
+                                .ReadAsStringAsync()
+                                .Result;
+
+            List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
+            return cursos;
         }
     }
 }

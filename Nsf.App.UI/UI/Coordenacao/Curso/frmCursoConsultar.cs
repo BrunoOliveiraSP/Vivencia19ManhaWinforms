@@ -48,7 +48,19 @@ namespace Nsf.App.UI
 
                 CarregarGrid();
 
+                
+
             }
          }
+
+        private void txtSigla_TextChanged(object sender, EventArgs e)
+        {
+            string sigla = txtSigla.Text;
+
+            API.Client.CursoApi api = new API.Client.CursoApi();
+            List<Model.CursoModel> consulta = api.ConsultarPorSigla(sigla);
+
+            dgvCursos.DataSource = consulta;
+        }
     }
 }
