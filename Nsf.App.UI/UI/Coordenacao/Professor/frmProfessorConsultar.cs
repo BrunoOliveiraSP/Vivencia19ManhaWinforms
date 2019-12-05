@@ -29,13 +29,13 @@ namespace Nsf.App.UI
 
             if (e.ColumnIndex == 5)
             {
-                Model.ProfessorModel model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorModel;
+                Model.ProfessorResponse model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorResponse;
 
                 DialogResult r = MessageBox.Show("Deseja excluir", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (r == DialogResult.Yes)
                 {
-                    API.Client.ProfessorApi api = new API.Client.ProfessorApi();
+                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
                     api.Deletar(model.IdProfessor);
 
                     MessageBox.Show("Removido com Sucesso");

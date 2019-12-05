@@ -97,8 +97,11 @@ namespace Nsf.App.UI
                     Model.ProfessorModel prof = DadosProfessor();
                     prof.IdProfessor = Convert.ToInt32(lblId.Text);
 
+                    request.Disciplina = disciplina;
+                    request.Professor = prof;
+
                     API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
-                    //api.Alterar(request);
+                    api.Alterar(request);
 
                     MessageBox.Show("Alterado com sucesso", "NSF");
                 }

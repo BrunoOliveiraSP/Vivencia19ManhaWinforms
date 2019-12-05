@@ -25,6 +25,26 @@ namespace Nsf.App.API.Client.v2
             return professor;
         }
 
+        public Model.ProfessorRequest Alterar(Model.ProfessorRequest professor)
+        {
+            string json = JsonConvert.SerializeObject(professor);
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var resp = client.PutAsync("http://localhost:5000/v2/Professor/", body).Result;
+
+            string jsonresposta = LerJsonResposta(resp);
+            professor = JsonConvert.DeserializeObject<Model.ProfessorRequest>(jsonresposta);
+
+            return professor;
+        }
+
+        public void Deletar(int id)
+        {
+            var resp = client.DeleteAsync("http://localhost:5000/v2/Professor/" + id).Result;
+
+            string jsonresposta = LerJsonResposta(resp);
+        }
+
         public List<Model.ProfessorResponse> ListarTodos()
         {
             HttpResponseMessage resp = client.GetAsync("http://localhost:5000/v2/Professor/").Result;
@@ -48,8 +68,8 @@ namespace Nsf.App.API.Client.v2
         private string LerJsonResposta(HttpResponseMessage resp)
         {
             string jsonResposta = resp.Content
-                                          .ReadAsStringAsync()
-                                          .Result;
+                                      .ReadAsStringAsync()
+                                      .Result;
 
             if (resp.IsSuccessStatusCode == false)
             {
