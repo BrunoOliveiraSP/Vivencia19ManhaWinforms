@@ -57,6 +57,7 @@
     <Compile Include="SalaAPI.cs" />
     <Compile Include="SalaVestibularAPI.cs" />
     <Compile Include="TurmaAPI.cs" />
+    <Compile Include="v2\ProfessorAPI.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nsf.App.Model\Nsf.App.Model.csproj">
