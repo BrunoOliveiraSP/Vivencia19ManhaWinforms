@@ -17,7 +17,7 @@ namespace Nsf.App.UI
         {
             if(e.ColumnIndex == 4)
             {
-                Model.ProfessorModel model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorModel;
+                Model.ProfessorResponse model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorResponse;
 
                 frmProfessorCadastrar tela = new frmProfessorCadastrar();
                 tela.CarregaarCampos(model);
@@ -58,8 +58,8 @@ namespace Nsf.App.UI
 
                 if (nome != string.Empty)
                 {
-                    API.Client.ProfessorApi db = new API.Client.ProfessorApi();
-                    List<Model.ProfessorModel> lista = db.ConsultarPorNome(nome);
+                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    List<Model.ProfessorResponse> lista = api.ConsultarPorNome(nome);
                     dgvProfessores.AutoGenerateColumns = false;
                     dgvProfessores.DataSource = lista;
                 }
@@ -74,8 +74,8 @@ namespace Nsf.App.UI
 
         public void CarregarGrid()
         {
-            API.Client.ProfessorApi db = new API.Client.ProfessorApi();
-            List<Model.ProfessorModel> lista = db.ListarTodos();
+            API.Client.v2.ProfessorAPI db = new API.Client.v2.ProfessorAPI();
+            List<Model.ProfessorResponse> lista = db.ListarTodos();
             dgvProfessores.AutoGenerateColumns = false;
             dgvProfessores.DataSource = lista;
         }

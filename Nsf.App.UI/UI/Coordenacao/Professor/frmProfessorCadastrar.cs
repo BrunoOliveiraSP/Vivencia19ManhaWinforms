@@ -14,7 +14,7 @@ namespace Nsf.App.UI
             Carregarlbx();
 		}
 
-        public void CarregaarCampos(Model.ProfessorModel prof)
+        public void CarregaarCampos(Model.ProfessorResponse prof)
         {
             panelId.Visible = true;
             lblId.Text = prof.IdProfessor.ToString();
@@ -39,6 +39,21 @@ namespace Nsf.App.UI
             txtLogin.Text = prof.IdLogin.ToString();
             nudPrimeiroEmprego.Value = prof.NrAnoPrimeiroEmprego;
             cboContrato.Text = prof.TpContratacao;
+
+            lbxDisciplinasDoProfessor.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+            lbxDisciplinasDoProfessor.DataSource = prof.Disciplina;
+
+            List<Model.Model.DiciplinaModel> disponiveis = lbxDisciplinasDisponiveis.DataSource as List<Model.Model.DiciplinaModel>;
+
+            foreach (Model.Model.DiciplinaModel item in prof.Disciplina)
+            {
+                Model.Model.DiciplinaModel disciplina = disponiveis.FirstOrDefault(x => x.IdDisciplina == item.IdDisciplina);
+                disponiveis.Remove(disciplina);
+            }
+
+            lbxDisciplinasDisponiveis.DataSource = null;
+            lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+            lbxDisciplinasDisponiveis.DataSource = disponiveis;
         }
 
         private Model.ProfessorModel DadosProfessor()
@@ -114,12 +129,15 @@ namespace Nsf.App.UI
 
         public void Carregarlbx()
         {
-            string a = string.Empty;
+            if (lbxDisciplinasDisponiveis.DataSource == null && lbxDisciplinasDoProfessor.DataSource == null)
+            {
+                string a = string.Empty;
 
-            API.Client.DisciplinaAPI db = new API.Client.DisciplinaAPI();
-            List<Model.Model.DiciplinaModel> lista = db.ListarDisciplina(a);
-            lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-            lbxDisciplinasDisponiveis.DataSource = lista;
+                API.Client.DisciplinaAPI db = new API.Client.DisciplinaAPI();
+                List<Model.Model.DiciplinaModel> lista = db.ListarDisciplina(a);
+                lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+                lbxDisciplinasDisponiveis.DataSource = lista;
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

@@ -25,6 +25,26 @@ namespace Nsf.App.API.Client.v2
             return professor;
         }
 
+        public List<Model.ProfessorResponse> ListarTodos()
+        {
+            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/v2/Professor/").Result;
+
+            string jsonresposta = LerJsonResposta(resp);
+            List<Model.ProfessorResponse> list = JsonConvert.DeserializeObject<List<Model.ProfessorResponse>>(jsonresposta);
+
+            return list;
+        }
+
+        public List<Model.ProfessorResponse> ConsultarPorNome(string nome)
+        {
+            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/v2/Professor/nome/" + nome).Result;
+
+            string jsonresposta = LerJsonResposta(resp);
+            List<Model.ProfessorResponse> list = JsonConvert.DeserializeObject<List<Model.ProfessorResponse>>(jsonresposta);
+
+            return list;
+        }
+
         private string LerJsonResposta(HttpResponseMessage resp)
         {
             string jsonResposta = resp.Content
