@@ -10,6 +10,6 @@ namespace Nsf.App.Model
     {
         public ProfessorModel Professor { get; set;}
 
-        public Model.DiciplinaModel Disciplina { get; set; }
+        public List<Model.DiciplinaModel> Disciplina { get; set; }
     }
 }

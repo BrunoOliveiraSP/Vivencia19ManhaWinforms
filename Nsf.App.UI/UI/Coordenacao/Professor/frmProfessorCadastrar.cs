@@ -76,46 +76,34 @@ namespace Nsf.App.UI
             {
                 if (Convert.ToInt32(lblId.Text) != 0)
                 {
-                    List<Model.ProfessorRequest> request = new List<Model.ProfessorRequest>();
+                    Model.ProfessorRequest request = new Model.ProfessorRequest();
 
                     List<Model.Model.DiciplinaModel> disciplina = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
                     Model.ProfessorModel prof = DadosProfessor();
                     prof.IdProfessor = Convert.ToInt32(lblId.Text);
 
-                    foreach (Model.Model.DiciplinaModel item in disciplina)
-                    {
-                        Model.ProfessorRequest req = new Model.ProfessorRequest();
-                        req.Disciplina = item;
-                        req.Professor = prof;
-
-                        request.Add(req);
-                    }
-
-                    API.Client.ProfessorApi api = new API.Client.ProfessorApi();
-                    api.Alterar(prof);
+                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    //api.Alterar(request);
 
                     MessageBox.Show("Alterado com sucesso", "NSF");
                 }
                 else
                 {
-                    List<Model.ProfessorRequest> request = new List<Model.ProfessorRequest>();
+                    Model.ProfessorRequest request = new Model.ProfessorRequest();
 
                     List<Model.Model.DiciplinaModel> disciplina = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
                     Model.ProfessorModel prof = DadosProfessor();
 
-                    foreach (Model.Model.DiciplinaModel item in disciplina)
-                    {
-                        Model.ProfessorRequest req = new Model.ProfessorRequest();
-                        req.Disciplina = item;
-                        req.Professor = prof;
+                    request.Disciplina = disciplina;
+                    request.Professor = prof;
 
-                        request.Add(req);
-                    }
-
-                    API.Client.ProfessorApi Api = new API.Client.ProfessorApi();
-                    Api.Inserir(prof);
+                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    request = api.Inserir(request);
 
                     MessageBox.Show("Inserido com sucesso", "NSF");
+
+                    panelId.Visible = true;
+                    lblId.Text = request.Professor.IdProfessor.ToString();
                 }
             }
             catch (ArgumentException ex)
@@ -131,23 +119,32 @@ namespace Nsf.App.UI
             API.Client.DisciplinaAPI db = new API.Client.DisciplinaAPI();
             List<Model.Model.DiciplinaModel> lista = db.ListarDisciplina(a);
             lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-            foreach (Model.Model.DiciplinaModel item in lista)
-            {
-                lbxDisciplinasDisponiveis.Items.Add(item);
-            }
-            
+            lbxDisciplinasDisponiveis.DataSource = lista;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if(lbxDisciplinasDisponiveis.SelectedItem != null)
             {
+                List<Model.Model.DiciplinaModel> list = new List<Model.Model.DiciplinaModel>();
+                
+
+                if (lbxDisciplinasDoProfessor.DataSource != null)
+                    list = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
+
+                lbxDisciplinasDoProfessor.DataSource = null;
                 Model.Model.DiciplinaModel disciplina = lbxDisciplinasDisponiveis.SelectedItem as Model.Model.DiciplinaModel;
+                list.Add(disciplina);
 
                 lbxDisciplinasDoProfessor.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-                lbxDisciplinasDoProfessor.Items.Add(disciplina);
+                lbxDisciplinasDoProfessor.DataSource = list;
 
-                lbxDisciplinasDisponiveis.Items.RemoveAt(lbxDisciplinasDisponiveis.SelectedIndex);
+                List<Model.Model.DiciplinaModel> disponiveis = lbxDisciplinasDisponiveis.DataSource as List<Model.Model.DiciplinaModel>;
+                disponiveis.Remove(disciplina);
+
+                lbxDisciplinasDisponiveis.DataSource = null;
+                lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+                lbxDisciplinasDisponiveis.DataSource = disponiveis;
             }
         }
 
@@ -155,12 +152,24 @@ namespace Nsf.App.UI
         {
             if (lbxDisciplinasDoProfessor.SelectedItem != null)
             {
+                List<Model.Model.DiciplinaModel> list = new List<Model.Model.DiciplinaModel>();
+
+                if (lbxDisciplinasDisponiveis.DataSource != null)
+                    list = lbxDisciplinasDisponiveis.DataSource as List<Model.Model.DiciplinaModel>;
+
+                lbxDisciplinasDisponiveis.DataSource = null;
                 Model.Model.DiciplinaModel disciplina = lbxDisciplinasDoProfessor.SelectedItem as Model.Model.DiciplinaModel;
+                list.Add(disciplina);
 
                 lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-                lbxDisciplinasDisponiveis.Items.Add(disciplina);
+                lbxDisciplinasDisponiveis.DataSource = list;
 
-                lbxDisciplinasDoProfessor.Items.RemoveAt(lbxDisciplinasDoProfessor.SelectedIndex);
+                List<Model.Model.DiciplinaModel> doprofessor = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
+                doprofessor.Remove(disciplina);
+
+                lbxDisciplinasDoProfessor.DataSource = null;
+                lbxDisciplinasDoProfessor.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
+                lbxDisciplinasDoProfessor.DataSource = doprofessor;
             }
         }
 
