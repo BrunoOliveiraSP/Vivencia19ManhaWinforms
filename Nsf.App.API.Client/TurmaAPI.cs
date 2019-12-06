@@ -48,7 +48,7 @@ namespace Nsf.App.API.Client
             string json = JsonConvert.SerializeObject(model);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PutAsync("http://localhost:5000/Turma", body).Result;
+            var resp = client.PutAsync("http://localhost:5000/Turma/", body).Result;
 
             if (resp.IsSuccessStatusCode == false)
             {
