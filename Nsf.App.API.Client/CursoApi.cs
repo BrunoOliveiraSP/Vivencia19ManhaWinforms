@@ -18,6 +18,11 @@ namespace Nsf.App.API.Client
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
             var resp = client.PostAsync("http://localhost:5000/Curso/", body).Result;
+
+            if (resp.IsSuccessStatusCode == false)
+            {
+                string jsonResp = resp.Content.ReadAsStringAsync().Result;
+            }
              
         }
         public List<Model.CursoModel> ListarTodos()

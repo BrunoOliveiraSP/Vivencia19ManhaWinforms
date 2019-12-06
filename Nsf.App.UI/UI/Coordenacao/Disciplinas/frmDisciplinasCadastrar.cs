@@ -56,14 +56,16 @@ namespace Nsf.App.UI
                     API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
                     api.Alterar(model);
 
-                    MessageBox.Show("Diciplina Alterada com sucesso!");
+                    MessageBox.Show("Diciplina alterada com sucesso!");
                 }
-
-                
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro,Tente Novamante");
+                MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.");
             }
         }
     }

@@ -35,27 +35,21 @@ namespace Nsf.App.API.Client
 
         public void Inserir(DiciplinaModel diciplina)
         {
-            try
+
+            string json = JsonConvert.SerializeObject(diciplina);
+
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage respota = client.PostAsync("http://localhost:5000/Diciplina/Inserir", body).Result;
+
+            if (respota.IsSuccessStatusCode == false)
             {
-                string json = JsonConvert.SerializeObject(diciplina);
+                string jsonResposta = respota.Content
+                                             .ReadAsStringAsync()
+                                             .Result;
 
-                StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage respota = client.PostAsync("http://localhost:5000/Diciplina/Inserir", body).Result;
-
-                if (respota.IsSuccessStatusCode == false)
-                {
-                    string jsonResposta = respota.Content
-                                                 .ReadAsStringAsync()
-                                                 .Result;
-
-                    Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
-                    throw new ArgumentException(erro.Mensagem);
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException($"Erro, Tente Novamente, Messagem de erro: {e.Message}");
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new ArgumentException(erro.Mensagem);
             }
         }
 

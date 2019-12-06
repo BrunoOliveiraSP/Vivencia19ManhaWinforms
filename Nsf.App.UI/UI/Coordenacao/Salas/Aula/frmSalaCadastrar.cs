@@ -5,7 +5,6 @@ namespace Nsf.App.UI
 {
 	public partial class frmSalaCadastrar : NsfUserScreen
 	{
-        string operacao = "Inserir";
         Model.SalaModel modeloSala = new Model.SalaModel();
         API.Client.SalaAPI api = new API.Client.SalaAPI();
 
@@ -26,14 +25,17 @@ namespace Nsf.App.UI
         {
             try
             {
-                if (operacao == "Inserir")
+                if (modeloSala.idSala == 0)
                 {
                     modeloSala.dtInclusao = DateTime.Now;
                     PreencherModelo();
-                    api.Inserir(modeloSala);
+                    modeloSala = api.Inserir(modeloSala);
+
+                    lblId.Text = modeloSala.idSala.ToString();
+
                     MessageBox.Show("Sala inserida com sucesso", "Operação bem sucessida", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if(operacao == "Alterar")
+                else
                 {
                     PreencherModelo();
                     if(MessageBox.Show("Deseja realmente alterar as informações?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -57,7 +59,8 @@ namespace Nsf.App.UI
             chkAtivo.Checked = Convert.ToBoolean(modelo.btAtivo);
             lblId.Text = modelo.idSala.ToString();
             label5.Text = "  Alterar Sala ";
-            operacao = "Alterar";
+
+            modeloSala = modelo;
         }
         public void PreencherModelo()
         {
