@@ -19,6 +19,16 @@ namespace Nsf.App.API.Client
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
             var resp = client.PostAsync("http://localhost:5000/turma/", body).Result;
+
+            if (resp.IsSuccessStatusCode == false)
+            {
+                string jsonResposta = resp.Content
+                                          .ReadAsStringAsync()
+                                          .Result;
+
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new ArgumentException(erro.Mensagem);
+            }
         }
         public List<Nsf.App.Model.TurmaModel> ListarTodos()
         {

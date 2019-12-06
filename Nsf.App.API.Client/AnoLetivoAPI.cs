@@ -80,5 +80,16 @@ namespace Nsf.App.API.Client
                 throw new ArgumentException(erro.Mensagem);
             }
         }
+
+        private string LerJsonResposta(HttpResponseMessage resp)
+        {
+            string jsonResposta = resp.Content.ReadAsStringAsync().Result;
+
+            if (resp.IsSuccessStatusCode == false)
+            {
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new ArgumentException(erro.Mensagem);
+            }
+        }
     }
 }
