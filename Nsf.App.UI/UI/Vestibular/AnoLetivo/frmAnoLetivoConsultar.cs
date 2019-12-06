@@ -46,16 +46,25 @@ namespace Nsf.App.UI
 
             if (e.ColumnIndex == 5)
             {
-                Model.AnoLetivoModel model = dgvAnosLetivos.CurrentRow.DataBoundItem as Model.AnoLetivoModel;
-
-                DialogResult r = MessageBox.Show("Deseja Remover?", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (r == DialogResult.Yes)
+                try
                 {
-                    API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
+                    Model.AnoLetivoModel model = dgvAnosLetivos.CurrentRow.DataBoundItem as Model.AnoLetivoModel;
 
-                    api.Remover(model.IdAnoLetivo);
-                    MessageBox.Show("Removido com sucesso");
+                    DialogResult r = MessageBox.Show("Deseja Remover?", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (r == DialogResult.Yes)
+                    {
+                        API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
+
+                        api.Remover(model.IdAnoLetivo);
+                        MessageBox.Show("Removido com sucesso");
+
+                        this.CarregarGrid();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

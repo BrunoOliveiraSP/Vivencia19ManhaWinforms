@@ -21,6 +21,7 @@ namespace Nsf.App.UI
         }
 
         int id = 0;
+        int idAnoLetivo = 0;
 
         private void CarregarCruso()
         {
@@ -35,6 +36,7 @@ namespace Nsf.App.UI
         public void CarregarTela(Model.AnoLetivoModel model)
         {
             id = model.IdAnoLetivo;
+            idAnoLetivo = model.IdAnoLetivo;
             nudAno.Value = model.NrAno;
             dtpInicio.Value = model.DtInicio;
             dtpFim.Value = model.DtFim;
@@ -67,15 +69,17 @@ namespace Nsf.App.UI
                     api.Alterar(model);
 
                     MessageBox.Show("Alterado com sucesso");
-                }
 
+                    idAnoLetivo = model.IdAnoLetivo;
+                }
                 else
                 {
                     api.Inserir(model);
 
                     MessageBox.Show("Cadastrado com sucesso");
-                }
 
+                    //idAnoLetivo = model.IdAnoLetivo;
+                }
             }
             catch (Exception ex)
             {
@@ -85,41 +89,66 @@ namespace Nsf.App.UI
 
         private void btnTurmaAdd_Click(object sender, EventArgs e)
         {
-            Nsf.App.Model.TurmaModel model = new Model.TurmaModel();
-
-            Model.CursoModel comboCurso = cboTurmaCurso.SelectedItem as Model.CursoModel;
-
-            model.TpPeriodo = cboTurmaPeriodo.Text;
-            model.NmTurma = txtTurmaNome.Text;
-            model.NrCapacidadeMax = Convert.ToInt32(nudTurmaCapacidade.Value);
-            model.IdAnoLetivo = 2;
-            model.IdCurso = comboCurso.IdCurso;
-
-            Nsf.App.API.Client.TurmaAPI api = new Nsf.App.API.Client.TurmaAPI();
-            
-            if (id > 0)
+            try
             {
-                model.IdTurma = id;
-                api.Alterar(model);
+                if(idAnoLetivo == 0)
+                {
+                    throw new ArgumentException("Impossível criar ou alterar uma turma sem antes selecionar um Ano Letivo");
+                }
 
-                MessageBox.Show("Alterado com sucesso");
+                Nsf.App.Model.TurmaModel model = new Model.TurmaModel();
+
+                Model.CursoModel comboCurso = cboTurmaCurso.SelectedItem as Model.CursoModel;
+
+                model.TpPeriodo = cboTurmaPeriodo.Text;
+                model.NmTurma = txtTurmaNome.Text;
+                model.NrCapacidadeMax = Convert.ToInt32(nudTurmaCapacidade.Value);
+                model.IdAnoLetivo = idAnoLetivo;
+                model.IdCurso = comboCurso.IdCurso;
+
+                Nsf.App.API.Client.TurmaAPI api = new Nsf.App.API.Client.TurmaAPI();
+
+                if (id > 0)
+                {
+                    model.IdTurma = id;
+                    api.Alterar(model);
+
+                    MessageBox.Show("Alterado com sucesso");
+
+                    dgvTurma.DataSource = null;
+                    this.CarregarGrid();
+                }
+                else
+                {
+                    api.InserirTurma(model);
+
+                    MessageBox.Show("Cadastrado com sucesso");
+
+                    dgvTurma.DataSource = null;
+                    this.CarregarGrid();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                api.InserirTurma(model);
-
-                MessageBox.Show("Cadastrado com sucesso");
+                MessageBox.Show(ex.Message);
             }
-                
         }
 
         public void CarregarGrid()
         {
-            API.Client.TurmaAPI API = new App.API.Client.TurmaAPI();
-            List<TurmaModel> turma = API.ListarTodos();
+            try
+            {
+                API.Client.TurmaAPI API = new App.API.Client.TurmaAPI();
+                List<TurmaModel> turma = API.ListarTodos();
 
-            dgvTurma.AutoGenerateColumns = false;
-            dgvTurma.DataSource = turma;
+                dgvTurma.AutoGenerateColumns = false;
+                dgvTurma.DataSource = turma;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void dgvTurma_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -137,24 +166,29 @@ namespace Nsf.App.UI
 
             if(e.ColumnIndex == 5)
             {
-                Model.TurmaModel turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaModel;
-
-                DialogResult r = MessageBox.Show("Deseja Remover?", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (r == DialogResult.Yes)
+                try
                 {
-                    API.Client.TurmaAPI api = new API.Client.TurmaAPI();
+                    Model.TurmaModel turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaModel;
 
-                    api.Remover(turma.IdTurma);
+                    DialogResult r = MessageBox.Show("Deseja Remover?", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    MessageBox.Show("Removido com sucesso");
+                    if (r == DialogResult.Yes)
+                    {
+                        API.Client.TurmaAPI api = new API.Client.TurmaAPI();
+
+                        api.Remover(turma.IdTurma);
+
+                        MessageBox.Show("Removido com sucesso");
+
+                        dgvTurma.DataSource = null;
+                        this.CarregarGrid();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
-        }
-
-        private void btnModuloAdd_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
