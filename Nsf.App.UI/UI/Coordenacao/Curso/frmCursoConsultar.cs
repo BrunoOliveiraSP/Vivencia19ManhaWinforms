@@ -91,7 +91,7 @@ namespace Nsf.App.UI
          }
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
-        {
+        {//a
             if (txtSigla.Text != string.Empty)
             {
                 string sigla = txtSigla.Text.ToUpper();
