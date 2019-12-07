@@ -105,5 +105,16 @@ namespace Nsf.App.API.Client
                                 .Result;
             return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
         }
+        public List<DiciplinaModel> ListarTudo()
+        {
+            string json;
+
+            json = client.GetAsync("http://localhost:5000/Diciplina/ConsultarTudo")
+                                .Result
+                                .Content
+                                .ReadAsStringAsync()
+                                .Result;
+            return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
+        }
     }
 }
