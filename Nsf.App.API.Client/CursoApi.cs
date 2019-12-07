@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Nsf.App.API.Client
 {
@@ -14,30 +15,40 @@ namespace Nsf.App.API.Client
 
         public void InserirCurso(Nsf.App.Model.CursoModel curso)
         {
+            
             string json = JsonConvert.SerializeObject(curso);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PostAsync("http://localhost:5000/Curso/", body)
-                .Result
-                .Content
-                .ReadAsStringAsync()
-                .Result
-                ;
-            this.VerificarErro(resp); 
+            HttpResponseMessage resp = client.PostAsync("http://localhost:5000/Curso/", body).Result;
+
+            if (resp.IsSuccessStatusCode == false)
+            {
+                string jsonResposta = resp.Content
+                                      .ReadAsStringAsync()
+                                      .Result;
+
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new Exception(erro.Mensagem);
+            }
+
         }
 
         public void AlterarCurso(Model.CursoModel curso)
         {
-            string json = JsonConvert.SerializeObject(curso);
+            
+                string json = JsonConvert.SerializeObject(curso);
+                StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+                var resposta = client.PutAsync("http://localhost:5000/Curso/", body).Result;
 
-            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+            if (resposta.IsSuccessStatusCode == false)
+            {
+                string jsonResposta = resposta.Content
+                                      .ReadAsStringAsync()
+                                      .Result;
 
-            var resposta = client.PutAsync("http://localhost:5000/Curso/", body)
-                                            .Result
-                                            .Content
-                                            .ReadAsStringAsync()
-                                            .Result;
-            this.VerificarErro(resposta);
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new Exception(erro.Mensagem);
+            }
         }
         public List<Model.CursoModel> ListarTodos()
         {
@@ -63,18 +74,25 @@ namespace Nsf.App.API.Client
             this.VerificarErro(json);
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
+
         }
 
         public void Remover(int id)
         {
-            var json = client.DeleteAsync("http://localhost:5000/Curso/" + id)
-                .Result
-                .Content
-                .ReadAsStringAsync()
-                .Result;
+            try
+            {
+                var json = client.DeleteAsync("http://localhost:5000/Curso/" + id)
+                    .Result
+                    .Content
+                    .ReadAsStringAsync()
+                    .Result;
 
-            this.VerificarErro(json);
-
+                this.VerificarErro(json);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException($"Erro, Tente Novamente, Messagem de erro:{e.Message}");
+            }
         }
 
         public List<Model.CursoModel> ConsultarPorSigla(string sigla)
