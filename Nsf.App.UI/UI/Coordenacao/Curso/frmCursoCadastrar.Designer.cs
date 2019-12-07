@@ -395,6 +395,7 @@
             this.btnAdd.Text = ">>";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lbxDisciplinasDisponiveis
             // 
@@ -405,6 +406,7 @@
             this.lbxDisciplinasDisponiveis.Name = "lbxDisciplinasDisponiveis";
             this.lbxDisciplinasDisponiveis.Size = new System.Drawing.Size(250, 244);
             this.lbxDisciplinasDisponiveis.TabIndex = 5;
+            this.lbxDisciplinasDisponiveis.SelectedIndexChanged += new System.EventHandler(this.lbxDisciplinasDisponiveis_SelectedIndexChanged);
             // 
             // frmCursoCadastrar
             // 

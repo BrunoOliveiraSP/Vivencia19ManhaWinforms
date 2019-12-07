@@ -14,25 +14,26 @@ namespace Nsf.App.UI
 
         private void txtCurso_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (txtCurso.Text != string.Empty)
             {
-                string cursoNome = txtCurso.Text;
+                string nmcurso = txtCurso.Text;
+                string primeiraLetra = nmcurso.Substring(0, 1).ToUpper();
+                string restoNm = nmcurso.Substring(1).ToLower();
+                string nomeCurso = primeiraLetra + restoNm;
 
                 API.Client.CursoApi api = new API.Client.CursoApi();
 
-                List<Model.CursoModel> cursos = api.ConsultarPorNome(cursoNome);
+                List<Model.CursoModel> cursos = api.ConsultarPorNome(nomeCurso);
 
                 dgvCursos.AutoGenerateColumns = false;
                 dgvCursos.DataSource = cursos;
-
-                if (txtCurso.Text == string.Empty && txtSigla.Text == string.Empty)
-                    CarregarGrid();
-
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK);
+                CarregarGrid();
             }
+                
+            
         }
 
         public void CarregarGrid()
@@ -91,18 +92,18 @@ namespace Nsf.App.UI
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (txtSigla.Text != string.Empty)
             {
-                string sigla = txtSigla.Text;
+                string sigla = txtSigla.Text.ToUpper();
 
                 API.Client.CursoApi api = new API.Client.CursoApi();
                 List<Model.CursoModel> consulta = api.ConsultarPorSigla(sigla);
 
                 dgvCursos.DataSource = consulta;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK);
+                CarregarGrid();
             }
         }
 

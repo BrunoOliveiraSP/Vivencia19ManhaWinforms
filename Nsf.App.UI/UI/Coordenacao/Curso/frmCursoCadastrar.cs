@@ -47,8 +47,13 @@ namespace Nsf.App.UI
                 {
 
                     Nsf.App.Model.CursoModel curso = new Model.CursoModel();
-                    curso.NmCurso = txtCurso.Text;
-                    curso.DsSigla = txtSigla.Text;
+
+                    string nmcurso = txtCurso.Text;
+                    string primeiraLetra = nmcurso.Substring(0, 1).ToUpper();
+                    string restoNm= nmcurso.Substring(1).ToLower();
+                    string nomeCurso = primeiraLetra + restoNm;
+                    curso.NmCurso = nomeCurso;
+                    curso.DsSigla = txtSigla.Text.ToUpper();
                     curso.DsCategoria = cboCategoria.Text;
                     curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
                     if (chkAtivo.Checked == true)
@@ -67,8 +72,13 @@ namespace Nsf.App.UI
                 {
                     Nsf.App.Model.CursoModel curso = new Model.CursoModel();
                     curso.IdCurso = Convert.ToInt32(lblId.Text);
-                    curso.NmCurso = txtCurso.Text;
-                    curso.DsSigla = txtSigla.Text;
+
+                    string nmcurso = txtCurso.Text;
+                    string primeiraLetra = nmcurso.Substring(0, 1).ToUpper();
+                    string restoNm = nmcurso.Substring(1).ToLower();
+                    string cursoNome = primeiraLetra + restoNm;
+                    curso.NmCurso = cursoNome; ;
+                    curso.DsSigla = txtSigla.Text.ToUpper();
                     curso.DsCategoria = cboCategoria.Text;
                     curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
                     if (chkAtivo.Checked == true)
@@ -104,6 +114,15 @@ namespace Nsf.App.UI
                 nudCapacidade.Value = 50;
                 chkAtivo.Checked = true;
             }
-        
+
+        private void lbxDisciplinasDisponiveis_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
