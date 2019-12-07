@@ -14,6 +14,8 @@ namespace Nsf.App.UI
         {
         	InitializeComponent();
             api = new API.Client.DisciplinaAPI();
+            dgvDisciplinas.AutoGenerateColumns = false;
+            dgvDisciplinas.DataSource = api.ListarTudo();
         }
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
