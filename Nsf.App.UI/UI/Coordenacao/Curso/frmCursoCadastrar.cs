@@ -18,7 +18,7 @@ namespace Nsf.App.UI
         {
             if (curso != null)
             {
-                
+
                 lblId.Text = Convert.ToString(curso.IdCurso);
                 txtCurso.Text = curso.NmCurso;
                 txtSigla.Text = curso.DsSigla;
@@ -36,77 +36,74 @@ namespace Nsf.App.UI
                     chkAtivo.Checked = true;
             }
         }
-    
+
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-           int id = Convert.ToInt32(lblId.Text);
-           if (id == 0)
-           {
-                try
+            try
+            {
+                int id = Convert.ToInt32(lblId.Text);
+                if (id == 0)
                 {
-                        Nsf.App.Model.CursoModel curso = new Model.CursoModel();
-                        curso.NmCurso = txtCurso.Text;
-                        curso.DsSigla = txtSigla.Text;
-                        curso.DsCategoria = cboCategoria.Text;
-                        curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
-                        if (chkAtivo.Checked == true)
-                            curso.BtAtivo = 1;
-                        if (chkAtivo.Checked == false)
-                            curso.BtAtivo = 0;
 
-                        Nsf.App.API.Client.CursoApi api = new API.Client.CursoApi();
-                        api.InserirCurso(curso);
-                        MessageBox.Show("Curso inserido no sistema com sucesso", "NSF");
+                    Nsf.App.Model.CursoModel curso = new Model.CursoModel();
+                    curso.NmCurso = txtCurso.Text;
+                    curso.DsSigla = txtSigla.Text;
+                    curso.DsCategoria = cboCategoria.Text;
+                    curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
+                    if (chkAtivo.Checked == true)
+                        curso.BtAtivo = 1;
+                    if (chkAtivo.Checked == false)
+                        curso.BtAtivo = 0;
 
-                        LimparCampos();
+                    Nsf.App.API.Client.CursoApi api = new API.Client.CursoApi();
+                    api.InserirCurso(curso);
+                    MessageBox.Show("Curso inserido no sistema com sucesso", "NSF");
+
+                    LimparCampos();
+
                 }
-                catch (ArgumentException ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Nsf.App.Model.CursoModel curso = new Model.CursoModel();
+                    curso.IdCurso = Convert.ToInt32(lblId.Text);
+                    curso.NmCurso = txtCurso.Text;
+                    curso.DsSigla = txtSigla.Text;
+                    curso.DsCategoria = cboCategoria.Text;
+                    curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
+                    if (chkAtivo.Checked == true)
+                        curso.BtAtivo = 1;
+                    if (chkAtivo.Checked == false)
+                        curso.BtAtivo = 0;
+
+                    Nsf.App.API.Client.CursoApi api = new API.Client.CursoApi();
+                    api.AlterarCurso(curso);
+                    MessageBox.Show("Dados do curso alterados com sucesso", "NSF");
+
+                    LimparCampos();
+
+
                 }
-           }
-           else
-           {
-              try
-              {
-                 Nsf.App.Model.CursoModel curso = new Model.CursoModel();
-                 curso.IdCurso = Convert.ToInt32(lblId.Text);
-                 curso.NmCurso = txtCurso.Text;
-                 curso.DsSigla = txtSigla.Text;
-                 curso.DsCategoria = cboCategoria.Text;
-                 curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
-                 if (chkAtivo.Checked == true)
-                     curso.BtAtivo = 1;
-                 if (chkAtivo.Checked == false)
-                     curso.BtAtivo = 0;
-
-                 Nsf.App.API.Client.CursoApi api = new API.Client.CursoApi();
-                 api.AlterarCurso(curso);
-                 MessageBox.Show("Dados do curso alterados com sucesso", "NSF");
-
-                 LimparCampos();
 
 
-              }
-              catch (Exception ex)
-              {
-                 MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
-              }
-           }
-            
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
+
         }
-    
-
-
-        public void LimparCampos()
-        {
-            lblId.Text = "0";
-            txtCurso.Text = string.Empty;
-            txtSigla.Text = string.Empty;
-            cboCategoria.Text = "Selecione";
-            nudCapacidade.Value = 50;
-            chkAtivo.Checked = true;
-        }
+        
+            public void LimparCampos()
+            {
+                lblId.Text = "0";
+                txtCurso.Text = string.Empty;
+                txtSigla.Text = string.Empty;
+                cboCategoria.Text = "Selecione";
+                nudCapacidade.Value = 50;
+                chkAtivo.Checked = true;
+            }
+        
     }
 }
