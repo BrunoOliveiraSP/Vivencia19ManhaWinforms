@@ -79,19 +79,16 @@ namespace Nsf.App.API.Client
 
         public void Remover(int id)
         {
-            try
-            {
-                var json = client.DeleteAsync("http://localhost:5000/Curso/" + id)
-                    .Result
-                    .Content
-                    .ReadAsStringAsync()
-                    .Result;
+            var json = client.DeleteAsync("http://localhost:5000/Curso/" + id).Result;
 
-                this.VerificarErro(json);
-            }
-            catch (Exception e)
+            if (json.IsSuccessStatusCode == false)
             {
-                throw new ArgumentException($"Erro, Tente Novamente, Messagem de erro:{e.Message}");
+                string jsonResposta = json.Content
+                                      .ReadAsStringAsync()
+                                      .Result;
+
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
+                throw new Exception(erro.Mensagem);
             }
         }
 

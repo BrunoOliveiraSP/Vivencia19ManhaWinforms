@@ -54,14 +54,14 @@ namespace Nsf.App.UI
 
         private void dgvCursos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            if (e.ColumnIndex == 5)
+            try
             {
-                DialogResult r = MessageBox.Show("Deseja remover?", "NSF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (r == DialogResult.Yes)
+                if (e.ColumnIndex == 5)
                 {
-                    try
+                    DialogResult r = MessageBox.Show("Deseja remover?", "NSF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (r == DialogResult.Yes)
                     {
+
                         Model.CursoModel curso = dgvCursos.CurrentRow.DataBoundItem as Model.CursoModel;
 
                         API.Client.CursoApi api = new API.Client.CursoApi();
@@ -69,28 +69,24 @@ namespace Nsf.App.UI
 
                         MessageBox.Show("Curso removido do sistema com sucesso", "NSF");
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK);
-                    }
-
+                    CarregarGrid();
                 }
-
-                    
-                CarregarGrid();
-            }
-            if (e.ColumnIndex == 4)
-            {
-                DialogResult r2 = MessageBox.Show("Deseja alterar os dados deste curso?", "NSF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (r2 == DialogResult.Yes)
+                if (e.ColumnIndex == 4)
                 {
-                    Model.CursoModel curso = dgvCursos.CurrentRow.DataBoundItem as Model.CursoModel;
+                    DialogResult r2 = MessageBox.Show("Deseja alterar os dados deste curso?", "NSF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (r2 == DialogResult.Yes)
+                    {
+                        Model.CursoModel curso = dgvCursos.CurrentRow.DataBoundItem as Model.CursoModel;
 
-                    frmInicial.Current.OpenScreen(new frmCursoCadastrar(curso));
-                    Hide();
+                        frmInicial.Current.OpenScreen(new frmCursoCadastrar(curso));
+                        Hide();
+                    }
                 }
             }
-                        
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
          }
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
