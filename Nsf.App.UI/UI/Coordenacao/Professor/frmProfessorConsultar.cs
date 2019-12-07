@@ -47,7 +47,7 @@ namespace Nsf.App.UI
 
         private void frmProfessorConsultar_Load(object sender, EventArgs e)
         {
-            CarregarGrid();
+          //  CarregarGrid();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
