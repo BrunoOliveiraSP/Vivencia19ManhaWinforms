@@ -17,13 +17,27 @@ namespace Nsf.App.API.Client
             string json = JsonConvert.SerializeObject(curso);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PostAsync("http://localhost:5000/Curso/", body).Result;
+            var resp = client.PostAsync("http://localhost:5000/Curso/", body)
+                .Result
+                .Content
+                .ReadAsStringAsync()
+                .Result
+                ;
+            this.VerificarErro(resp); 
+        }
 
-            if (resp.IsSuccessStatusCode == false)
-            {
-                string jsonResp = resp.Content.ReadAsStringAsync().Result;
-            }
-             
+        public void AlterarCurso(Model.CursoModel curso)
+        {
+            string json = JsonConvert.SerializeObject(curso);
+
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var resposta = client.PutAsync("http://localhost:5000/Curso/", body)
+                                            .Result
+                                            .Content
+                                            .ReadAsStringAsync()
+                                            .Result;
+            this.VerificarErro(resposta);
         }
         public List<Model.CursoModel> ListarTodos()
         {
@@ -33,6 +47,7 @@ namespace Nsf.App.API.Client
                                 .ReadAsStringAsync()
                                 .Result;
 
+            this.VerificarErro(json);
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
         }
@@ -45,13 +60,21 @@ namespace Nsf.App.API.Client
                                 .ReadAsStringAsync()
                                 .Result;
 
+            this.VerificarErro(json);
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
         }
 
         public void Remover(int id)
         {
-            var resp = client.DeleteAsync("http://localhost:5000/Curso/" + id).Result;
+            var json = client.DeleteAsync("http://localhost:5000/Curso/" + id)
+                .Result
+                .Content
+                .ReadAsStringAsync()
+                .Result;
+
+            this.VerificarErro(json);
+
         }
 
         public List<Model.CursoModel> ConsultarPorSigla(string sigla)
@@ -62,8 +85,20 @@ namespace Nsf.App.API.Client
                                 .ReadAsStringAsync()
                                 .Result;
 
+            this.VerificarErro(json);
+
+
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
+        }
+
+        private void VerificarErro(string respostaAPI)
+        {
+            if (respostaAPI.Contains("CodigoErro"))
+            {
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(respostaAPI);
+                throw new ArgumentException(erro.Mensagem);
+            }
         }
     }
 }
