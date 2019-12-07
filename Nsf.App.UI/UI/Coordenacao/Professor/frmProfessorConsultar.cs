@@ -20,7 +20,7 @@ namespace Nsf.App.UI
                 Model.ProfessorResponse model = dgvProfessores.CurrentRow.DataBoundItem as Model.ProfessorResponse;
 
                 frmProfessorCadastrar tela = new frmProfessorCadastrar();
-                tela.CarregaarCampos(model);
+                tela.CarregarCampos(model);
 
                 frmInicial.Current.OpenScreen(tela);
 

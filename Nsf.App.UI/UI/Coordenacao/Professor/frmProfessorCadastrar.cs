@@ -14,7 +14,7 @@ namespace Nsf.App.UI
             Carregarlbx();
 		}
 
-        public void CarregaarCampos(Model.ProfessorResponse prof)
+        public void CarregarCampos(Model.ProfessorResponse prof)
         {
             panelId.Visible = true;
             lblId.Text = prof.IdProfessor.ToString();
@@ -103,7 +103,7 @@ namespace Nsf.App.UI
                     API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
                     api.Alterar(request);
 
-                    MessageBox.Show("Alterado com sucesso", "NSF");
+                    MessageBox.Show("Alterado com sucesso!", "NSF");
                 }
                 else
                 {
@@ -118,7 +118,7 @@ namespace Nsf.App.UI
                     API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
                     request = api.Inserir(request);
 
-                    MessageBox.Show("Inserido com sucesso", "NSF");
+                    MessageBox.Show("Inserido com sucesso!", "NSF");
 
                     panelId.Visible = true;
                     lblId.Text = request.Professor.IdProfessor.ToString();
@@ -126,8 +126,14 @@ namespace Nsf.App.UI
             }
             catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message,"NSF",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         public void Carregarlbx()
@@ -193,13 +199,6 @@ namespace Nsf.App.UI
                 lbxDisciplinasDoProfessor.DataSource = doprofessor;
             }
         }
-
-        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-        }
+        
     }
 }
