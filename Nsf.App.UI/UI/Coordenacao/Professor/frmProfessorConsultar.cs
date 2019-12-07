@@ -66,9 +66,14 @@ namespace Nsf.App.UI
                 else
                     CarregarGrid();
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -77,7 +82,7 @@ namespace Nsf.App.UI
             API.Client.v2.ProfessorAPI db = new API.Client.v2.ProfessorAPI();
             List<Model.ProfessorResponse> lista = db.ListarTodos();
             dgvProfessores.AutoGenerateColumns = false;
-            dgvProfessores.DataSource = lista;
+            dgvProfessores.DataSource =  lista;
         }
 
         private void dgvProfessores_CellContentClick(object sender, DataGridViewCellEventArgs e)
