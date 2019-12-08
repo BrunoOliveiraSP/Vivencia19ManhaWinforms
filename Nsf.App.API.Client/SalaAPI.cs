@@ -70,7 +70,7 @@ namespace Nsf.App.API.Client
         }
         private void VerificarErro(string resposta)
         {
-            if (resposta.Contains("CodigoErro"))
+            if (resposta.Contains("codigoErro"))
             {
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(resposta);
                 throw new ArgumentException(erro.Mensagem);
