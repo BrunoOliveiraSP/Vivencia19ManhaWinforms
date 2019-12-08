@@ -54,7 +54,8 @@ namespace Nsf.App.UI
 
 		private void lblCursosNovo_Click(object sender, EventArgs e)
 		{
-			frmInicial.Current.OpenScreen(new frmCursoCadastrar());
+            Model.CursoModel curso = new Model.CursoModel();
+			frmInicial.Current.OpenScreen(new frmCursoCadastrar(curso));
 		}
 
 		private void lblCursosConsultar_Click(object sender, EventArgs e)

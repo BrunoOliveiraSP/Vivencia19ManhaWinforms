@@ -17,17 +17,20 @@ namespace Nsf.App.API.Client
             string json = JsonConvert.SerializeObject(model);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PostAsync("http://localhost:5000/AnoLetivo", body).Result;
+            var resp = client.PostAsync("http://localhost:5000/AnoLetivo/", body).Result;
+
 
             if (resp.IsSuccessStatusCode == false)
             {
+
                 string jsonResposta = resp.Content
-                                          .ReadAsStringAsync()
-                                          .Result;
+                              .ReadAsStringAsync()
+                              .Result;
 
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
                 throw new ArgumentException(erro.Mensagem);
             }
+
         }
 
         public void Alterar(Nsf.App.Model.AnoLetivoModel model)
@@ -37,7 +40,7 @@ namespace Nsf.App.API.Client
             string json = JsonConvert.SerializeObject(model);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PutAsync("http://localhost:5000/AnoLetivo", body).Result;
+            var resp = client.PutAsync("http://localhost:5000/AnoLetivo/", body).Result;
 
             if (resp.IsSuccessStatusCode == false)
             {
@@ -54,7 +57,7 @@ namespace Nsf.App.API.Client
         {
             HttpClient client = new HttpClient();
 
-            string json = client.GetAsync("http://localhost:5000/AnoLetivo")
+            string json = client.GetAsync("http://localhost:5000/AnoLetivo/")
                                 .Result
                                 .Content
                                 .ReadAsStringAsync()
@@ -68,7 +71,7 @@ namespace Nsf.App.API.Client
         public void Remover(int id)
         {
             HttpClient client = new HttpClient();
-            var resp = client.DeleteAsync("http://localhost:5000/AnoLetivo" + id).Result;
+            var resp = client.DeleteAsync("http://localhost:5000/AnoLetivo/" + id).Result;
 
             if (resp.IsSuccessStatusCode == false)
             {
