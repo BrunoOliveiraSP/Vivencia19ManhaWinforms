@@ -12,73 +12,75 @@ namespace Nsf.App.API.Client
     {
         HttpClient client = new HttpClient();
 
-        public void Inserir(Model.ProfessorModel professor)
+        public Model.ProfessorRequest Inserir(Model.ProfessorRequest professor)
         {
             string json = JsonConvert.SerializeObject(professor);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PostAsync("http://localhost:5000/Professor/", body).Result;
+            HttpResponseMessage resp = client.PostAsync("http://localhost:5000/Professor/", body).Result;
 
-            if (resp.IsSuccessStatusCode == false)
-            {
-                string jsonResposta = resp.Content
-                                          .ReadAsStringAsync()
-                                          .Result;
+            string jsonresposta = LerJsonResposta(resp);
+            professor = JsonConvert.DeserializeObject<Model.ProfessorRequest>(jsonresposta);
 
-                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
-                throw new ArgumentException(erro.Mensagem);
-            }
+            return professor;
         }
 
-        public void Alterar(Model.ProfessorModel professor)
+        public Model.ProfessorRequest Alterar(Model.ProfessorRequest professor)
         {
             string json = JsonConvert.SerializeObject(professor);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
             var resp = client.PutAsync("http://localhost:5000/Professor/", body).Result;
 
-            if (resp.IsSuccessStatusCode == false)
-            {
-                string jsonResposta = resp.Content
-                                          .ReadAsStringAsync()
-                                          .Result;
+            string jsonresposta = LerJsonResposta(resp);
+            professor = JsonConvert.DeserializeObject<Model.ProfessorRequest>(jsonresposta);
 
-                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
-                throw new ArgumentException(erro.Mensagem);
-            }
+            return professor;
         }
 
         public void Deletar(int id)
         {
             var resp = client.DeleteAsync("http://localhost:5000/Professor/" + id).Result;
 
+            string jsonresposta = LerJsonResposta(resp);
+        }
+
+        public List<Model.ProfessorResponse> ListarTodos()
+        {
+            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/Professor/").Result;
+
+            string jsonresposta = LerJsonResposta(resp);
+            List<Model.ProfessorResponse> list = JsonConvert.DeserializeObject<List<Model.ProfessorResponse>>(jsonresposta);
+
+            return list;
+        }
+
+        public List<Model.ProfessorResponse> ConsultarPorNome(string nome)
+        {
+            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/Professor/" + nome).Result;
+
+            string jsonresposta = LerJsonResposta(resp);
+            List<Model.ProfessorResponse> list = JsonConvert.DeserializeObject<List<Model.ProfessorResponse>>(jsonresposta);
+
+            return list;
+        }
+
+        private string LerJsonResposta(HttpResponseMessage resp)
+        {
+            string jsonResposta = resp.Content
+                                      .ReadAsStringAsync()
+                                      .Result;
+
             if (resp.IsSuccessStatusCode == false)
             {
-                string jsonResposta = resp.Content
-                                          .ReadAsStringAsync()
-                                          .Result;
-
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
                 throw new ArgumentException(erro.Mensagem);
             }
+
+            return jsonResposta;
         }
 
-        public List<Model.ProfessorModel> ListarTodos()
-        {
-            string json = client.GetAsync("http://localhost:5000/Professor/").Result.Content.ReadAsStringAsync().Result;
 
-            List<Model.ProfessorModel> list = JsonConvert.DeserializeObject<List<Model.ProfessorModel>>(json);
 
-            return list;
-        }
-
-        public List<Model.ProfessorModel> ConsultarPorNome(string nome)
-        {
-            string json = client.GetAsync("http://localhost:5000/Professor/nome/" + nome).Result.Content.ReadAsStringAsync().Result;
-
-            List<Model.ProfessorModel> list = JsonConvert.DeserializeObject<List<Model.ProfessorModel>>(json);
-
-            return list;
-        }
     }
 }

@@ -100,7 +100,7 @@ namespace Nsf.App.UI
                     request.Disciplina = disciplina;
                     request.Professor = prof;
 
-                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    API.Client.ProfessorApi api = new API.Client.ProfessorApi();
                     api.Alterar(request);
 
                     MessageBox.Show("Alterado com sucesso!", "NSF");
@@ -115,7 +115,8 @@ namespace Nsf.App.UI
                     request.Disciplina = disciplina;
                     request.Professor = prof;
 
-                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    API.Client.ProfessorApi api = new API.Client.ProfessorApi();
+
                     request = api.Inserir(request);
 
                     MessageBox.Show("Inserido com sucesso!", "NSF");
