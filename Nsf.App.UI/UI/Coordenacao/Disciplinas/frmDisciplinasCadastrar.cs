@@ -6,21 +6,23 @@ namespace Nsf.App.UI
 {
     public partial class frmDisciplinasCadastrar : NsfUserScreen
     {
-
         public frmDisciplinasCadastrar(DiciplinaModel diciplina)
         {
             InitializeComponent();
             carregar(diciplina);
         }
 
-        public void carregar(DiciplinaModel diciplina)
+        int id;
+
+        public void carregar(DiciplinaModel disciplina)
         {
-            if (diciplina != null)
+            if (disciplina != null)
             {
-                txtDisciplina.Text = diciplina.NmDisciplina;
-                txtSigla.Text = diciplina.DsSigla;
-                lblId.Text = diciplina.IdDisciplina.ToString();
-                chkAtivo.Checked = Convert.ToBoolean(diciplina.BtAtivo);
+                txtDisciplina.Text = disciplina.NmDisciplina;
+                txtSigla.Text = disciplina.DsSigla;
+                lblId.Text = disciplina.IdDisciplina.ToString();
+                chkAtivo.Checked = Convert.ToBoolean(disciplina.BtAtivo);
+                id = disciplina.IdDisciplina;
             }
         }
 
@@ -29,11 +31,9 @@ namespace Nsf.App.UI
             try
             {
 
-                //
-                int id = int.Parse(lblId.Text);
                 DiciplinaModel model = new DiciplinaModel();
 
-                if (id == 0)
+                if (int.Parse(lblId.Text) == 0)
                 {
                     model.NmDisciplina = txtDisciplina.Text;
                     model.DsSigla = txtSigla.Text;
@@ -41,22 +41,23 @@ namespace Nsf.App.UI
                     model.DtInclusao = DateTime.Now;
 
                     API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
-                    api.Inserir(model);
+                    id = api.Inserir(model);
+                    lblId.Text = id.ToString();
 
-                    MessageBox.Show("Diciplina inserida");
+                    MessageBox.Show("Diciplina inserida com sucesso!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    model.IdDisciplina = int.Parse(lblId.Text);
+                    model.IdDisciplina = id;
                     model.NmDisciplina = txtDisciplina.Text;
                     model.DsSigla = txtSigla.Text;
                     model.BtAtivo = Convert.ToUInt64(chkAtivo.Checked);
                     model.DtUltimaAlteracao = DateTime.Now;
 
-                    API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
-                    api.Alterar(model);
+                    API.Client.DisciplinaAPI API = new API.Client.DisciplinaAPI();
+                    API.Alterar(model);
 
-                    MessageBox.Show("Diciplina alterada com sucesso!");
+                    MessageBox.Show("Diciplina alterada com sucesso!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (ArgumentException ex)
@@ -65,7 +66,7 @@ namespace Nsf.App.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.");
+                MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

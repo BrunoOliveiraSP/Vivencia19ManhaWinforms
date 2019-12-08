@@ -8,24 +8,22 @@ namespace Nsf.App.UI
 	public partial class frmDisciplinasConsultar : NsfUserScreen
 	  {
 
-        API.Client.DisciplinaAPI api;
+        API.Client.DisciplinaAPI API;
 
         public frmDisciplinasConsultar()
         {
         	InitializeComponent();
-            api = new API.Client.DisciplinaAPI();
+            API = new API.Client.DisciplinaAPI();
             dgvDisciplinas.AutoGenerateColumns = false;
-            dgvDisciplinas.DataSource = api.ListarTudo();
+            dgvDisciplinas.DataSource = API.ListarTudo();
         }
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
         {
-            dgvDisciplinas.AutoGenerateColumns = false;
-
-            if (txtSigla.Text.Length >= 1)
-            {
-                dgvDisciplinas.DataSource = api.ListarSigla(txtSigla.Text);
-            }
+            if (txtSigla.Text.Length > 0)
+                dgvDisciplinas.DataSource = API.ListarSigla(txtSigla.Text);
+            else
+                dgvDisciplinas.DataSource = API.ListarTudo();
         }
 
         private void dgvDisciplinas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -39,22 +37,18 @@ namespace Nsf.App.UI
             if (e.ColumnIndex == 4)
             {
                 DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
-                api.Remover(diciplina.IdDisciplina);
-                dgvDisciplinas.RefreshEdit();
-
-
-
+                API.Remover(diciplina.IdDisciplina);
+                dgvDisciplinas.DataSource = API.ListarTudo();
+                MessageBox.Show("Disciplina removida!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void txtDisciplina_TextChanged_1(object sender, EventArgs e)
         {
-            dgvDisciplinas.AutoGenerateColumns = false;
-
-            if (txtDisciplina.Text.Length >= 1)
-            {
-                dgvDisciplinas.DataSource = api.ListarDisciplina(txtDisciplina.Text);
-            }
+            if (txtDisciplina.Text.Length != 0)
+                dgvDisciplinas.DataSource = API.ListarDisciplina(txtDisciplina.Text);
+            else
+                dgvDisciplinas.DataSource = API.ListarTudo();
         }
     }
 }

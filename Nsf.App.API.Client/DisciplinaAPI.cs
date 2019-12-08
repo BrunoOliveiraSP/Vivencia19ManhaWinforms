@@ -14,33 +14,49 @@ namespace Nsf.App.API.Client
     {
         HttpClient client = new HttpClient();
 
-        public List<DiciplinaModel> ListarSigla(string text)
+        public List<DiciplinaModel> ListarSigla(string Sigla)
         {
-            try
-            {
-                string json = client.GetAsync($"http://localhost:5000/Diciplina/Sigla/{text}")
-                                .Result
-                                .Content
-                                .ReadAsStringAsync()
-                                .Result;
-                return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro, Tente Novamente, Messagem de erro: {ex.Message}");
-                return null;
-            }
-            
+
+            string json = client.GetAsync($"http://localhost:5000/Diciplina/Sigla/{Sigla}")
+                            .Result
+                            .Content
+                            .ReadAsStringAsync()
+                            .Result;
+            return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
         }
 
-        public void Inserir(DiciplinaModel diciplina)
+        public int Inserir(DiciplinaModel Disciplina)
         {
 
-            string json = JsonConvert.SerializeObject(diciplina);
+            string json = JsonConvert.SerializeObject(Disciplina);
 
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage respota = client.PostAsync("http://localhost:5000/Diciplina/Inserir", body).Result;
+
+            string JsonResposta = LerJson(respota);
+            Disciplina = JsonConvert.DeserializeObject<DiciplinaModel>(JsonResposta);
+
+            return Disciplina.IdDisciplina;
+        }
+
+        public void Alterar(DiciplinaModel Disciplina)
+        {
+         
+            string json = JsonConvert.SerializeObject(Disciplina);
+         
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+         
+            HttpResponseMessage respota = client.PutAsync("http://localhost:5000/Diciplina/Alterar", body).Result;
+
+            string JsonResposta = LerJson(respota);
+        }
+
+        public void Remover(int id)
+        {
+            string json = JsonConvert.SerializeObject(id);
+         
+            HttpResponseMessage respota = client.DeleteAsync($"http://localhost:5000/Diciplina/Remover/{id}").Result;
 
             if (respota.IsSuccessStatusCode == false)
             {
@@ -53,58 +69,17 @@ namespace Nsf.App.API.Client
             }
         }
 
-        public void Alterar(DiciplinaModel diciplina)
-        {
-            try
-            {
-
-                string json = JsonConvert.SerializeObject(diciplina);
-
-                StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage respota = client.PutAsync("http://localhost:5000/Diciplina/Alterar", body).Result;
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException($"Erro, Tente Novamente, Messagem de erro:{e.Message}");
-            }
-        }
-
-        public void Remover(int id)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(id);
-
-                HttpResponseMessage respota = client.DeleteAsync($"http://localhost:5000/Diciplina/Remover/{id}").Result;
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException($"Erro, Tente Novamente, Messagem de erro:{e.Message}");
-            }
-        }
-
         public List<DiciplinaModel> ListarDisciplina(string disciplina)
         {
-            string json;
 
-            if (string.IsNullOrEmpty(disciplina))
-            {
-                json = client.GetAsync("http://localhost:5000/Diciplina/ConsultarTudo")
-                                .Result
-                                .Content
-                                .ReadAsStringAsync()
-                                .Result;
-                return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
-            }
-
-            json = client.GetAsync($"http://localhost:5000/Diciplina/ConsultarPorDisciplina/{disciplina}")
+            string json = client.GetAsync($"http://localhost:5000/Diciplina/ConsultarPorDisciplina/{disciplina}")
                                 .Result
                                 .Content
                                 .ReadAsStringAsync()
                                 .Result;
             return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
         }
+
         public List<DiciplinaModel> ListarTudo()
         {
             string json;
@@ -115,6 +90,19 @@ namespace Nsf.App.API.Client
                                 .ReadAsStringAsync()
                                 .Result;
             return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
+        }
+
+        public string LerJson(HttpResponseMessage RespostaAPI)
+        {
+            string Json = RespostaAPI.Content.ReadAsStringAsync().Result;
+
+            if (RespostaAPI.IsSuccessStatusCode == false)
+            {
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(Json);
+                throw new ArgumentException(erro.Mensagem);
+            }
+
+            return Json;
         }
     }
 }
