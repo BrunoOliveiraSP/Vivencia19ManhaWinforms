@@ -17,7 +17,7 @@ namespace Nsf.App.API.Client.v2
             string json = JsonConvert.SerializeObject(professor);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage resp = client.PostAsync("http://localhost:5000/v2/Professor/", body).Result;
+            HttpResponseMessage resp = client.PostAsync("http://localhost:5000/Professor/", body).Result;
 
             string jsonresposta = LerJsonResposta(resp);
             professor = JsonConvert.DeserializeObject<Model.ProfessorRequest>(jsonresposta);
@@ -30,7 +30,7 @@ namespace Nsf.App.API.Client.v2
             string json = JsonConvert.SerializeObject(professor);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PutAsync("http://localhost:5000/v2/Professor/", body).Result;
+            var resp = client.PutAsync("http://localhost:5000/Professor/", body).Result;
 
             string jsonresposta = LerJsonResposta(resp);
             professor = JsonConvert.DeserializeObject<Model.ProfessorRequest>(jsonresposta);
@@ -40,14 +40,14 @@ namespace Nsf.App.API.Client.v2
 
         public void Deletar(int id)
         {
-            var resp = client.DeleteAsync("http://localhost:5000/v2/Professor/" + id).Result;
+            var resp = client.DeleteAsync("http://localhost:5000/Professor/" + id).Result;
 
             string jsonresposta = LerJsonResposta(resp);
         }
 
         public List<Model.ProfessorResponse> ListarTodos()
         {
-            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/v2/Professor/").Result;
+            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/Professor/").Result;
 
             string jsonresposta = LerJsonResposta(resp);
             List<Model.ProfessorResponse> list = JsonConvert.DeserializeObject<List<Model.ProfessorResponse>>(jsonresposta);
@@ -57,7 +57,7 @@ namespace Nsf.App.API.Client.v2
 
         public List<Model.ProfessorResponse> ConsultarPorNome(string nome)
         {
-            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/v2/Professor/nome/" + nome).Result;
+            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/Professor/" + nome).Result;
 
             string jsonresposta = LerJsonResposta(resp);
             List<Model.ProfessorResponse> list = JsonConvert.DeserializeObject<List<Model.ProfessorResponse>>(jsonresposta);
