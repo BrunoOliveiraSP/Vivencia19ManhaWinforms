@@ -8,24 +8,29 @@ namespace Nsf.App.UI
 	public partial class frmDisciplinasConsultar : NsfUserScreen
 	  {
 
-        API.Client.DisciplinaAPI api;
+        API.Client.DisciplinaAPI API;
 
         public frmDisciplinasConsultar()
         {
         	InitializeComponent();
-            api = new API.Client.DisciplinaAPI();
+            API = new API.Client.DisciplinaAPI();
             dgvDisciplinas.AutoGenerateColumns = false;
-            dgvDisciplinas.DataSource = api.ListarTudo();
+            dgvDisciplinas.DataSource = API.ListarTudo();
         }
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
         {
-            dgvDisciplinas.AutoGenerateColumns = false;
-
-            if (txtSigla.Text.Length >= 1)
+            if (txtSigla.Text.Length > 0)
             {
-                dgvDisciplinas.DataSource = api.ListarSigla(txtSigla.Text);
+                string nmSigla = txtSigla.Text;
+                string primeiraLetra = nmSigla.Substring(0, 1).ToUpper();
+                string restoNm = nmSigla.Substring(1).ToLower();
+                string nomeSigla = primeiraLetra + restoNm;
+                dgvDisciplinas.DataSource = API.ListarSigla(nomeSigla);
             }
+               
+            else
+                dgvDisciplinas.DataSource = API.ListarTudo();
         }
 
         private void dgvDisciplinas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -39,22 +44,25 @@ namespace Nsf.App.UI
             if (e.ColumnIndex == 4)
             {
                 DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
-                api.Remover(diciplina.IdDisciplina);
-                dgvDisciplinas.RefreshEdit();
-
-
-
+                API.Remover(diciplina.IdDisciplina);
+                dgvDisciplinas.DataSource = API.ListarTudo();
+                MessageBox.Show("Disciplina removida!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void txtDisciplina_TextChanged_1(object sender, EventArgs e)
         {
-            dgvDisciplinas.AutoGenerateColumns = false;
-
-            if (txtDisciplina.Text.Length >= 1)
+            if (txtDisciplina.Text.Length != 0)
             {
-                dgvDisciplinas.DataSource = api.ListarDisciplina(txtDisciplina.Text);
+                string nmdiciplina = txtDisciplina.Text;
+                string primeiraLetra = nmdiciplina.Substring(0, 1).ToUpper();
+                string restoNm = nmdiciplina.Substring(1).ToLower();
+                string nomeDiciplina = primeiraLetra + restoNm;
+                dgvDisciplinas.DataSource = API.ListarDisciplina(nomeDiciplina);
             }
+           
+            else
+                dgvDisciplinas.DataSource = API.ListarTudo();
         }
     }
 }

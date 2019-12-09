@@ -24,9 +24,7 @@ namespace Nsf.App.Model
 
         public string DsEmail { get; set; }
 
-
         public string DsCvLattes { get; set; }
-
 
         public int NrAnoPrimeiroEmprego { get; set; }
 
@@ -53,8 +51,5 @@ namespace Nsf.App.Model
         public DateTime DtFaculdadeInicio { get; set; }
 
         public DateTime DtFaculdadeFim { get; set; }
-
-
-
     }
 }
