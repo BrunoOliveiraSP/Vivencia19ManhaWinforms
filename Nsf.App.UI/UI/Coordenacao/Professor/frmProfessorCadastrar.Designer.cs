@@ -1015,6 +1015,7 @@
             this.btnReset.Text = "Resetar Senha";
             this.btnReset.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // frmProfessorCadastrar
             // 

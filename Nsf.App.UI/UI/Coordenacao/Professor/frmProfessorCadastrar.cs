@@ -8,7 +8,10 @@ namespace Nsf.App.UI
 {
 	public partial class frmProfessorCadastrar : NsfUserScreen
 	{
-		public frmProfessorCadastrar()
+        Model.ProfessorResponse modeloProf = new Model.ProfessorResponse();
+        API.Client.ProfessorApi api = new API.Client.ProfessorApi();
+
+        public frmProfessorCadastrar()
 		{
 			InitializeComponent();
             Carregarlbx();
@@ -36,24 +39,17 @@ namespace Nsf.App.UI
             dtpFaculdadeFim.Value = prof.DtFaculdadeFim;
             dtpFaculdadeInicio.Value = prof.DtFaculdadeInicio;
             dtpNascimento.Value = prof.DtNascimento;
-            txtLogin.Text = prof.IdLogin.ToString();
+            txtLogin.Text = prof.Login.DsLogin;
             nudPrimeiroEmprego.Value = prof.NrAnoPrimeiroEmprego;
             cboContrato.Text = prof.TpContratacao;
 
             lbxDisciplinasDoProfessor.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-            lbxDisciplinasDoProfessor.DataSource = prof.Disciplina;
+            lbxDisciplinasDoProfessor.DataSource = prof.DisciplinaProfessor;
 
-            List<Model.Model.DiciplinaModel> disponiveis = lbxDisciplinasDisponiveis.DataSource as List<Model.Model.DiciplinaModel>;
-
-            foreach (Model.Model.DiciplinaModel item in prof.Disciplina)
-            {
-                Model.Model.DiciplinaModel disciplina = disponiveis.FirstOrDefault(x => x.IdDisciplina == item.IdDisciplina);
-                disponiveis.Remove(disciplina);
-            }
-
-            lbxDisciplinasDisponiveis.DataSource = null;
             lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-            lbxDisciplinasDisponiveis.DataSource = disponiveis;
+            lbxDisciplinasDisponiveis.DataSource = prof.DisciplinaDisponiveis;
+
+            modeloProf = prof;
         }
 
         private Model.ProfessorModel DadosProfessor()
@@ -78,32 +74,49 @@ namespace Nsf.App.UI
             prof.DtFaculdadeFim = dtpFaculdadeFim.Value;
             prof.DtFaculdadeInicio = dtpFaculdadeInicio.Value;
             prof.DtNascimento = dtpNascimento.Value;
-            prof.IdLogin = Convert.ToInt32(txtLogin.Text);
             prof.NrAnoPrimeiroEmprego = Convert.ToInt32(nudPrimeiroEmprego.Value);
             prof.TpContratacao = cboContrato.Text;
 
             return prof;
         }
 
+        private Model.LoginModel DadosLogin()
+        {
+            Model.LoginModel login = new Model.LoginModel();
+
+            login.BtAtivo = true;
+            login.BtTrocar = true;
+            login.DsLogin = txtLogin.Text;
+            login.DsSenha = "1234";
+            login.DtInclusao = DateTime.Now;
+            login.DtUltimoLogin = DateTime.Now;
+            login.IdRole = 1;
+
+            return login;
+        }
+
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (Convert.ToInt32(lblId.Text) != 0)
+                if (modeloProf.IdProfessor != 0)
                 {
                     Model.ProfessorRequest request = new Model.ProfessorRequest();
 
                     List<Model.Model.DiciplinaModel> disciplina = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
                     Model.ProfessorModel prof = DadosProfessor();
-                    prof.IdProfessor = Convert.ToInt32(lblId.Text);
+                    prof.IdProfessor = modeloProf.IdProfessor;
 
                     request.Disciplina = disciplina;
                     request.Professor = prof;
+                    request.Login = modeloProf.Login;
 
-                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    request.Login.DsLogin = txtLogin.Text;
+                    request.Login.BtAtivo = chkAtivo.Checked;
+
                     api.Alterar(request);
 
-                    MessageBox.Show("Alterado com sucesso!", "NSF");
+                    MessageBox.Show("Alterado com sucesso!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -111,14 +124,15 @@ namespace Nsf.App.UI
 
                     List<Model.Model.DiciplinaModel> disciplina = lbxDisciplinasDoProfessor.DataSource as List<Model.Model.DiciplinaModel>;
                     Model.ProfessorModel prof = DadosProfessor();
+                    Model.LoginModel login = DadosLogin();
 
                     request.Disciplina = disciplina;
                     request.Professor = prof;
+                    request.Login = login;
 
-                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
                     request = api.Inserir(request);
 
-                    MessageBox.Show("Inserido com sucesso!", "NSF");
+                    MessageBox.Show("Inserido com sucesso!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     panelId.Visible = true;
                     lblId.Text = request.Professor.IdProfessor.ToString();
@@ -129,7 +143,7 @@ namespace Nsf.App.UI
                 MessageBox.Show(ex.Message,"NSF",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -199,6 +213,27 @@ namespace Nsf.App.UI
                 lbxDisciplinasDoProfessor.DataSource = doprofessor;
             }
         }
-        
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (modeloProf.Login.IdLogin != 0)
+                {
+                    api.ResetarSenha(modeloProf.Login);
+
+                    MessageBox.Show("Senha resetada!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

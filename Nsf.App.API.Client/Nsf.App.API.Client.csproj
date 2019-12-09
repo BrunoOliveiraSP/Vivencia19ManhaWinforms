@@ -58,7 +58,6 @@
     <Compile Include="SalaVestibularAPI.cs" />
     <Compile Include="TurmaAPI.cs" />
     <Compile Include="TurmaResponse.cs" />
-    <Compile Include="v2\ProfessorAPI.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nsf.App.Model\Nsf.App.Model.csproj">
@@ -68,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="v2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

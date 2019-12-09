@@ -52,6 +52,10 @@ namespace Nsf.App.Model
 
         public DateTime DtFaculdadeFim { get; set; }
 
-        public List<Model.DiciplinaModel> Disciplina { get; set; }
+        public List<Model.DiciplinaModel> DisciplinaProfessor { get; set; }
+
+        public List<Model.DiciplinaModel> DisciplinaDisponiveis { get; set; }
+
+        public LoginModel Login { get; set; }
     }
 }
