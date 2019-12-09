@@ -21,7 +21,14 @@ namespace Nsf.App.UI
         private void txtSigla_TextChanged(object sender, EventArgs e)
         {
             if (txtSigla.Text.Length > 0)
-                dgvDisciplinas.DataSource = API.ListarSigla(txtSigla.Text);
+            {
+                string nmSigla = txtSigla.Text;
+                string primeiraLetra = nmSigla.Substring(0, 1).ToUpper();
+                string restoNm = nmSigla.Substring(1).ToLower();
+                string nomeSigla = primeiraLetra + restoNm;
+                dgvDisciplinas.DataSource = API.ListarSigla(nomeSigla);
+            }
+               
             else
                 dgvDisciplinas.DataSource = API.ListarTudo();
         }
