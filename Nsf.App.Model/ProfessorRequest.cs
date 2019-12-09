@@ -11,5 +11,7 @@ namespace Nsf.App.Model
         public ProfessorModel Professor { get; set;}
 
         public List<Model.DiciplinaModel> Disciplina { get; set; }
+
+        public LoginModel Login { get; set; }
     }
 }

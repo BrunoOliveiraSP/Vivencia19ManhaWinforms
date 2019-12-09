@@ -55,9 +55,19 @@ namespace Nsf.App.API.Client
             return list;
         }
 
+        public void ResetarSenha(Model.LoginModel login)
+        {
+            string json = JsonConvert.SerializeObject(login);
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var resp = client.PutAsync("http://localhost:5000/Professor/resetarsenha/", body).Result;
+
+            string jsonresposta = LerJsonResposta(resp);
+        }
+
         public List<Model.ProfessorResponse> ConsultarPorNome(string nome)
         {
-            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/Professor/" + nome).Result;
+            HttpResponseMessage resp = client.GetAsync("http://localhost:5000/Professor/nome/" + nome).Result;
 
             string jsonresposta = LerJsonResposta(resp);
             List<Model.ProfessorResponse> list = JsonConvert.DeserializeObject<List<Model.ProfessorResponse>>(jsonresposta);
@@ -79,8 +89,5 @@ namespace Nsf.App.API.Client
 
             return jsonResposta;
         }
-
-
-
     }
 }

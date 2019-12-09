@@ -46,11 +46,6 @@ namespace Nsf.App.UI
             }
         }
 
-        private void frmProfessorConsultar_Load(object sender, EventArgs e)
-        {
-          //  CarregarGrid();
-        }
-
         private void txtNome_TextChanged(object sender, EventArgs e)
         {
             try
@@ -73,7 +68,7 @@ namespace Nsf.App.UI
                 MessageBox.Show(ex.Message);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -85,11 +80,6 @@ namespace Nsf.App.UI
             List<Model.ProfessorResponse> lista = db.ListarTodos();
             dgvProfessores.AutoGenerateColumns = false;
             dgvProfessores.DataSource =  lista;
-        }
-
-        private void dgvProfessores_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
