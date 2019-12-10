@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nsf.App.API.Client
+namespace Nsf.App.Model
 {
     public class TurmaResponse
     {
@@ -15,7 +15,6 @@ namespace Nsf.App.API.Client
         public string TpPeriodo { get; set; }
         public int NrCapacidadeMax { get; set; }
 
-        public int NrAno { get; set; }
 
         public string NmCurso { get; set; }
     }
