@@ -45,10 +45,20 @@ namespace Nsf.App.UI
                 }
                 if (e.ColumnIndex == 4)
                 {
-                    DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
-                    API.Remover(diciplina.IdDisciplina);
-                    dgvDisciplinas.DataSource = API.ListarTudo();
-                    MessageBox.Show("Disciplina removida!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    DialogResult resposta = MessageBox.Show("Deseja realmente remover essa informação?", "NSF",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                    if (resposta == DialogResult.Yes)
+                    {
+                        DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
+                        API.Remover(diciplina.IdDisciplina);
+                        dgvDisciplinas.DataSource = API.ListarTudo();
+                        MessageBox.Show("Disciplina removida!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }                                          
+
+                    
                 }
             }
             catch (ArgumentException ex)

@@ -33,7 +33,7 @@ namespace Nsf.App.UI
 
                 DiciplinaModel model = new DiciplinaModel();
 
-                if (int.Parse(lblId.Text) == 0)
+                if (id == 0)
                 {
                     model.NmDisciplina = txtDisciplina.Text;
                     model.DsSigla = txtSigla.Text;
