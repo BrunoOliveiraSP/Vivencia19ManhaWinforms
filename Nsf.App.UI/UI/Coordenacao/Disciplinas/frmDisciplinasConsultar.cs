@@ -28,18 +28,29 @@ namespace Nsf.App.UI
 
         private void dgvDisciplinas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 3)
+            try
             {
-                DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
-                frmInicial.Current.OpenScreen(new frmDisciplinasCadastrar(diciplina));
-                Hide();
+                if (e.ColumnIndex == 3)
+                {
+                    DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
+                    frmInicial.Current.OpenScreen(new frmDisciplinasCadastrar(diciplina));
+                    Hide();
+                }
+                if (e.ColumnIndex == 4)
+                {
+                    DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
+                    API.Remover(diciplina.IdDisciplina);
+                    dgvDisciplinas.DataSource = API.ListarTudo();
+                    MessageBox.Show("Disciplina removida!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            if (e.ColumnIndex == 4)
+            catch (ArgumentException ex)
             {
-                DiciplinaModel diciplina = dgvDisciplinas.CurrentRow.DataBoundItem as DiciplinaModel;
-                API.Remover(diciplina.IdDisciplina);
-                dgvDisciplinas.DataSource = API.ListarTudo();
-                MessageBox.Show("Disciplina removida!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message, "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
