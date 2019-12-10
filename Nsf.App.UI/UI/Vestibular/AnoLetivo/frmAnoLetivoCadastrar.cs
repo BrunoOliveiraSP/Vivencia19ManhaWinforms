@@ -14,14 +14,11 @@ namespace Nsf.App.UI
         public frmAnoLetivoCadastrar()
         {
             InitializeComponent();
-
-            CarregarGrid();
-
             CarregarCruso();
         }
 
-        int id = 0;
-        int idAnoLetivo = 0;
+        Model.TurmaModel turmaModel = new Model.TurmaModel();
+        Model.AnoLetivoModel anoLetivoModel = new AnoLetivoModel();
 
         private void CarregarCruso()
         {
@@ -35,12 +32,11 @@ namespace Nsf.App.UI
 
         public void CarregarTela(Model.AnoLetivoModel model)
         {
-            id = model.IdAnoLetivo;
-            idAnoLetivo = model.IdAnoLetivo;
-            nudAno.Value = model.NrAno;
             dtpInicio.Value = model.DtInicio;
-            dtpFim.Value = model.DtFim;
             cboStatus.Text = model.TpStatus;
+            nudAno.Value = model.NrAno;
+            dtpFim.Value = model.DtFim;
+            anoLetivoModel = model;
         }
 
         Nsf.App.Model.AnoLetivoModel model = new Model.AnoLetivoModel();
@@ -52,8 +48,8 @@ namespace Nsf.App.UI
             {
                 model.NrAno = Convert.ToInt32(nudAno.Value);
                 model.DtInicio = dtpInicio.Value;
-                model.DtFim = dtpFim.Value;
                 model.TpStatus = cboStatus.Text;
+                model.DtFim = dtpFim.Value;
 
                 if (rdnAberto.Checked == true)
                     model.BtAtivo = true;
@@ -63,22 +59,22 @@ namespace Nsf.App.UI
 
                 Nsf.App.API.Client.AnoLetivoAPI api = new API.Client.AnoLetivoAPI();
 
-                if (id > 0)
+                if (anoLetivoModel.IdAnoLetivo > 0)
                 {
-                    model.IdAnoLetivo = id;
+                    model.IdAnoLetivo = anoLetivoModel.IdAnoLetivo;
                     api.Alterar(model);
 
                     MessageBox.Show("Alterado com sucesso");
-
-                    idAnoLetivo = model.IdAnoLetivo;
                 }
                 else
                 {
-                    api.Inserir(model);
+                    Model.AnoLetivoModel anoLetivo = api.Inserir(model);
 
                     MessageBox.Show("Cadastrado com sucesso");
 
-                    //idAnoLetivo = model.IdAnoLetivo;
+                    anoLetivoModel = anoLetivo;
+
+                    CarregarGrid(anoLetivoModel.IdAnoLetivo);
                 }
             }
             catch (Exception ex)
@@ -91,7 +87,7 @@ namespace Nsf.App.UI
         {
             try
             {
-                if(idAnoLetivo == 0)
+                if(anoLetivoModel.IdAnoLetivo == 0)
                 {
                     throw new ArgumentException("Impossível criar ou alterar uma turma sem antes selecionar um Ano Letivo");
                 }
@@ -103,20 +99,20 @@ namespace Nsf.App.UI
                 model.TpPeriodo = cboTurmaPeriodo.Text;
                 model.NmTurma = txtTurmaNome.Text;
                 model.NrCapacidadeMax = Convert.ToInt32(nudTurmaCapacidade.Value);
-                model.IdAnoLetivo = idAnoLetivo;
+                model.IdAnoLetivo = anoLetivoModel.IdAnoLetivo;
                 model.IdCurso = comboCurso.IdCurso;
 
                 Nsf.App.API.Client.TurmaAPI api = new Nsf.App.API.Client.TurmaAPI();
 
-                if (id > 0)
+                if (turmaModel.IdTurma > 0)
                 {
-                    model.IdTurma = id;
+                    model.IdTurma = turmaModel.IdTurma;
                     api.Alterar(model);
 
                     MessageBox.Show("Alterado com sucesso");
 
                     dgvTurma.DataSource = null;
-                    this.CarregarGrid();
+                    this.CarregarGrid(anoLetivoModel.IdAnoLetivo);
                 }
                 else
                 {
@@ -125,7 +121,7 @@ namespace Nsf.App.UI
                     MessageBox.Show("Cadastrado com sucesso");
 
                     dgvTurma.DataSource = null;
-                    this.CarregarGrid();
+                    this.CarregarGrid(anoLetivoModel.IdAnoLetivo);
                 }
             }
             catch (Exception ex)
@@ -134,12 +130,12 @@ namespace Nsf.App.UI
             }
         }
 
-        public void CarregarGrid()
+        public void CarregarGrid(int idAnoLetivo)
         {
             try
             {
                 API.Client.TurmaAPI API = new App.API.Client.TurmaAPI();
-                List<TurmaModel> turma = API.ListarTodos();
+                List<TurmaResponse> turma = API.ConsultarTurmaPorAnoLetivo(idAnoLetivo);
 
                 dgvTurma.AutoGenerateColumns = false;
                 dgvTurma.DataSource = turma;
@@ -148,7 +144,6 @@ namespace Nsf.App.UI
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void dgvTurma_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -161,7 +156,7 @@ namespace Nsf.App.UI
                 txtTurmaNome.Text = turma.NmTurma;
                 nudTurmaCapacidade.Value = turma.NrCapacidadeMax;
 
-                id = turma.IdTurma;
+                turmaModel = turma;
             }
 
             if(e.ColumnIndex == 5)
@@ -181,7 +176,7 @@ namespace Nsf.App.UI
                         MessageBox.Show("Removido com sucesso");
 
                         dgvTurma.DataSource = null;
-                        this.CarregarGrid();
+                        this.CarregarGrid(anoLetivoModel.IdAnoLetivo);
                     }
                 }
                 catch (Exception ex)

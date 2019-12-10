@@ -1172,7 +1172,7 @@
             // Registro
             // 
             this.Registro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Registro.DataPropertyName = "IdCurso";
+            this.Registro.DataPropertyName = "NmCurso";
             this.Registro.HeaderText = "Curso";
             this.Registro.Name = "Registro";
             this.Registro.ReadOnly = true;

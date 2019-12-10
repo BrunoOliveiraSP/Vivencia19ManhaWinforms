@@ -38,6 +38,7 @@ namespace Nsf.App.UI
                 Nsf.App.UI.frmAnoLetivoCadastrar tela = new frmAnoLetivoCadastrar();
 
                 tela.CarregarTela(model);
+                tela.CarregarGrid(model.IdAnoLetivo);
 
                 frmInicial.Current.OpenScreen(tela);
 

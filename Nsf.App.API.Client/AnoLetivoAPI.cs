@@ -10,7 +10,7 @@ namespace Nsf.App.API.Client
 {
     public class AnoLetivoAPI
     {
-        public void Inserir(Nsf.App.Model.AnoLetivoModel model)
+        public Nsf.App.Model.AnoLetivoModel Inserir(Nsf.App.Model.AnoLetivoModel model)
         {
             HttpClient client = new HttpClient();
 
@@ -19,18 +19,17 @@ namespace Nsf.App.API.Client
 
             var resp = client.PostAsync("http://localhost:5000/AnoLetivo/", body).Result;
 
+            string jsonResposta = resp.Content.ReadAsStringAsync().Result;
 
             if (resp.IsSuccessStatusCode == false)
             {
-
-                string jsonResposta = resp.Content
-                              .ReadAsStringAsync()
-                              .Result;
 
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
                 throw new ArgumentException(erro.Mensagem);
             }
 
+            model = JsonConvert.DeserializeObject<Model.AnoLetivoModel>(jsonResposta);
+            return model;
         }
 
         public void Alterar(Nsf.App.Model.AnoLetivoModel model)

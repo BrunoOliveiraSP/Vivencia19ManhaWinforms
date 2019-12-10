@@ -30,15 +30,16 @@ namespace Nsf.App.API.Client
                 throw new ArgumentException(erro.Mensagem);
             }
         }
-        public List<Nsf.App.Model.TurmaModel> ListarTodos()
+        public List<Nsf.App.Model.TurmaResponse> ConsultarTurmaPorAnoLetivo(int id)
         {
             HttpClient client = new HttpClient();
 
-            string json = client.GetAsync("http://localhost:5000/turma/").Result
+            string json = client.GetAsync("http://localhost:5000/turma/" + id).Result
                                                                          .Content
                                                                          .ReadAsStringAsync()
                                                                          .Result;
-            List<TurmaModel> turma = JsonConvert.DeserializeObject<List<TurmaModel>>(json);
+
+            List<TurmaResponse> turma = JsonConvert.DeserializeObject<List<TurmaResponse>>(json);
             return turma;
         }
         public void Alterar(Nsf.App.Model.TurmaModel model)
