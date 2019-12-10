@@ -35,7 +35,8 @@ namespace Nsf.App.UI
 
                 if (r == DialogResult.Yes)
                 {
-                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    API.Client.ProfessorApi api = new API.Client.ProfessorApi();
+
                     api.Deletar(model.IdProfessor);
 
                     MessageBox.Show("Removido com Sucesso");
@@ -43,11 +44,6 @@ namespace Nsf.App.UI
                     CarregarGrid();
                 }
             }
-        }
-
-        private void frmProfessorConsultar_Load(object sender, EventArgs e)
-        {
-          //  CarregarGrid();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -58,7 +54,8 @@ namespace Nsf.App.UI
 
                 if (nome != string.Empty)
                 {
-                    API.Client.v2.ProfessorAPI api = new API.Client.v2.ProfessorAPI();
+                    API.Client.ProfessorApi api = new API.Client.ProfessorApi();
+
                     List<Model.ProfessorResponse> lista = api.ConsultarPorNome(nome);
                     dgvProfessores.AutoGenerateColumns = false;
                     dgvProfessores.DataSource = lista;
@@ -71,7 +68,7 @@ namespace Nsf.App.UI
                 MessageBox.Show(ex.Message);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -79,15 +76,10 @@ namespace Nsf.App.UI
 
         public void CarregarGrid()
         {
-            API.Client.v2.ProfessorAPI db = new API.Client.v2.ProfessorAPI();
+            API.Client.ProfessorApi db = new API.Client.ProfessorApi();
             List<Model.ProfessorResponse> lista = db.ListarTodos();
             dgvProfessores.AutoGenerateColumns = false;
             dgvProfessores.DataSource =  lista;
-        }
-
-        private void dgvProfessores_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

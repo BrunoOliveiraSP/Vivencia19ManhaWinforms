@@ -8,7 +8,17 @@ namespace Nsf.App.UI
 		public frmSalaConsultar()
 		{
 			InitializeComponent();
-		}
+
+            try
+            {
+                dgvSalas.AutoGenerateColumns = false;
+                dgvSalas.DataSource = api.ListarTodos();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         API.Client.SalaAPI api = new API.Client.SalaAPI();
         private void txtInstituicao_TextChanged(object sender, EventArgs e)

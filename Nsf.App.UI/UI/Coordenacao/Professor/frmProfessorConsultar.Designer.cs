@@ -95,7 +95,6 @@
             this.dgvProfessores.Size = new System.Drawing.Size(744, 390);
             this.dgvProfessores.TabIndex = 1;
             this.dgvProfessores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProfessores_CellClick);
-            this.dgvProfessores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProfessores_CellContentClick);
             // 
             // Nome
             // 
@@ -185,7 +184,6 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmProfessorConsultar";
             this.Size = new System.Drawing.Size(800, 600);
-            this.Load += new System.EventHandler(this.frmProfessorConsultar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfessores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

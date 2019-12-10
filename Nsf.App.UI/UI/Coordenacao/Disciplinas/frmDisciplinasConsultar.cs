@@ -21,7 +21,14 @@ namespace Nsf.App.UI
         private void txtSigla_TextChanged(object sender, EventArgs e)
         {
             if (txtSigla.Text.Length > 0)
-                dgvDisciplinas.DataSource = API.ListarSigla(txtSigla.Text);
+            {
+                string nmSigla = txtSigla.Text;
+                string primeiraLetra = nmSigla.Substring(0, 1).ToUpper();
+                string restoNm = nmSigla.Substring(1).ToLower();
+                string nomeSigla = primeiraLetra + restoNm;
+                dgvDisciplinas.DataSource = API.ListarSigla(nomeSigla);
+            }
+               
             else
                 dgvDisciplinas.DataSource = API.ListarTudo();
         }
@@ -57,7 +64,14 @@ namespace Nsf.App.UI
         private void txtDisciplina_TextChanged_1(object sender, EventArgs e)
         {
             if (txtDisciplina.Text.Length != 0)
-                dgvDisciplinas.DataSource = API.ListarDisciplina(txtDisciplina.Text);
+            {
+                string nmdiciplina = txtDisciplina.Text;
+                string primeiraLetra = nmdiciplina.Substring(0, 1).ToUpper();
+                string restoNm = nmdiciplina.Substring(1).ToLower();
+                string nomeDiciplina = primeiraLetra + restoNm;
+                dgvDisciplinas.DataSource = API.ListarDisciplina(nomeDiciplina);
+            }
+           
             else
                 dgvDisciplinas.DataSource = API.ListarTudo();
         }
