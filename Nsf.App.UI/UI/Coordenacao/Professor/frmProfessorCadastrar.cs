@@ -157,9 +157,12 @@ namespace Nsf.App.UI
                 string a = string.Empty;
 
                 API.Client.DisciplinaAPI db = new API.Client.DisciplinaAPI();
-                List<Model.Model.DiciplinaModel> lista = db.ListarDisciplina(a);
+                List<Model.Model.DiciplinaModel>  lista = db.ListarTudo();
                 lbxDisciplinasDisponiveis.DisplayMember = nameof(Model.Model.DiciplinaModel.NmDisciplina);
-                lbxDisciplinasDisponiveis.DataSource = lista;
+                lbxDisciplinasDisponiveis.DataSource =  lista;
+                
+               
+
             }
         }
 
