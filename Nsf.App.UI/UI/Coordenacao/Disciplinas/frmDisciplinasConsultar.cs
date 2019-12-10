@@ -81,9 +81,13 @@ namespace Nsf.App.UI
                 string nomeDiciplina = primeiraLetra + restoNm;
                 dgvDisciplinas.DataSource = API.ListarDisciplina(nomeDiciplina);
             }
-           
-            else
+
+            if (txtDisciplina.Text == string.Empty)
+            {
                 dgvDisciplinas.DataSource = API.ListarTudo();
+            }
+
+
         }
     }
 }
