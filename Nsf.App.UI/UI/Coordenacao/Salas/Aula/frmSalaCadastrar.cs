@@ -33,7 +33,7 @@ namespace Nsf.App.UI
 
                     lblId.Text = modeloSala.idSala.ToString();
 
-                    MessageBox.Show("Sala inserida com sucesso", "Operação bem sucessida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Sala inserida com sucesso.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -41,7 +41,7 @@ namespace Nsf.App.UI
                     if(MessageBox.Show("Deseja realmente alterar as informações?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         api.Alterar(modeloSala);
-                        MessageBox.Show("Sala alterada com sucesso", "Operação bem sucessida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Sala alterada com sucesso.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
                 }

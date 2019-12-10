@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSalaVestibularCadastrar));
             this.label5 = new System.Windows.Forms.Label();
             this.pnSelected = new System.Windows.Forms.Panel();
@@ -61,7 +61,7 @@
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(51)))), ((int)(((byte)(142)))));
             this.label5.Location = new System.Drawing.Point(48, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(430, 37);
+            this.label5.Size = new System.Drawing.Size(525, 44);
             this.label5.TabIndex = 5;
             this.label5.Text = "  Cadastrar Salas Vestibular  ";
             // 
@@ -110,7 +110,7 @@
             this.label8.ForeColor = System.Drawing.Color.Salmon;
             this.label8.Location = new System.Drawing.Point(135, 149);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(16, 19);
+            this.label8.Size = new System.Drawing.Size(19, 23);
             this.label8.TabIndex = 188;
             this.label8.Text = "*";
             // 
@@ -121,7 +121,7 @@
             this.label7.ForeColor = System.Drawing.Color.Salmon;
             this.label7.Location = new System.Drawing.Point(135, 183);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(16, 19);
+            this.label7.Size = new System.Drawing.Size(19, 23);
             this.label7.TabIndex = 187;
             this.label7.Text = "*";
             // 
@@ -137,8 +137,9 @@
             "Calhim"});
             this.cboVestibularInstituicao.Location = new System.Drawing.Point(158, 147);
             this.cboVestibularInstituicao.Name = "cboVestibularInstituicao";
-            this.cboVestibularInstituicao.Size = new System.Drawing.Size(346, 29);
+            this.cboVestibularInstituicao.Size = new System.Drawing.Size(346, 31);
             this.cboVestibularInstituicao.TabIndex = 0;
+            this.cboVestibularInstituicao.SelectedIndexChanged += new System.EventHandler(this.cboVestibularInstituicao_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -147,7 +148,7 @@
             this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(48, 149);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 19);
+            this.label4.Size = new System.Drawing.Size(116, 23);
             this.label4.TabIndex = 185;
             this.label4.Text = "Instituição:";
             // 
@@ -158,7 +159,7 @@
             this.cboVestibularSala.FormattingEnabled = true;
             this.cboVestibularSala.Location = new System.Drawing.Point(158, 183);
             this.cboVestibularSala.Name = "cboVestibularSala";
-            this.cboVestibularSala.Size = new System.Drawing.Size(346, 29);
+            this.cboVestibularSala.Size = new System.Drawing.Size(346, 31);
             this.cboVestibularSala.TabIndex = 1;
             // 
             // label6
@@ -168,7 +169,7 @@
             this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(91, 185);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 19);
+            this.label6.Size = new System.Drawing.Size(57, 23);
             this.label6.TabIndex = 184;
             this.label6.Text = "Sala:";
             // 
@@ -187,14 +188,14 @@
             this.Column5,
             this.Column2,
             this.Column1});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(190)))), ((int)(((byte)(227)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSalasVestibular.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(190)))), ((int)(((byte)(227)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSalasVestibular.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSalasVestibular.Location = new System.Drawing.Point(38, 238);
             this.dgvSalasVestibular.Name = "dgvSalasVestibular";
             this.dgvSalasVestibular.ReadOnly = true;
@@ -204,18 +205,19 @@
             this.dgvSalasVestibular.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSalasVestibular.Size = new System.Drawing.Size(729, 322);
             this.dgvSalasVestibular.TabIndex = 180;
+            this.dgvSalasVestibular.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalasVestibular_CellContentClick);
             // 
             // Registro
             // 
             this.Registro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Registro.DataPropertyName = "nm_local";
+            this.Registro.DataPropertyName = "nmLocal";
             this.Registro.HeaderText = "Instituição";
             this.Registro.Name = "Registro";
             this.Registro.ReadOnly = true;
             // 
             // Nome
             // 
-            this.Nome.DataPropertyName = "nm_sala";
+            this.Nome.DataPropertyName = "nmSala";
             this.Nome.HeaderText = "Sala";
             this.Nome.Name = "Nome";
             this.Nome.ReadOnly = true;
@@ -223,7 +225,7 @@
             // 
             // Column3
             // 
-            this.Column3.DataPropertyName = "ds_periodo";
+            this.Column3.DataPropertyName = "dsPeriodo";
             this.Column3.HeaderText = "Período";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -231,7 +233,7 @@
             // 
             // Column5
             // 
-            this.Column5.DataPropertyName = "nr_ordem";
+            this.Column5.DataPropertyName = "nrOrdem";
             this.Column5.HeaderText = "Ordem";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
@@ -265,9 +267,9 @@
             this.btnVestibularAdd.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold);
             this.btnVestibularAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(51)))), ((int)(((byte)(142)))));
             this.btnVestibularAdd.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVestibularAdd.Location = new System.Drawing.Point(608, 183);
+            this.btnVestibularAdd.Location = new System.Drawing.Point(603, 180);
             this.btnVestibularAdd.Name = "btnVestibularAdd";
-            this.btnVestibularAdd.Size = new System.Drawing.Size(138, 35);
+            this.btnVestibularAdd.Size = new System.Drawing.Size(152, 35);
             this.btnVestibularAdd.TabIndex = 3;
             this.btnVestibularAdd.Text = "Adicionar";
             this.btnVestibularAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -279,9 +281,9 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold);
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(518, 150);
+            this.label11.Location = new System.Drawing.Point(515, 150);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 19);
+            this.label11.Size = new System.Drawing.Size(90, 23);
             this.label11.TabIndex = 181;
             this.label11.Text = "Período:";
             // 
@@ -292,7 +294,7 @@
             this.label14.ForeColor = System.Drawing.Color.Salmon;
             this.label14.Location = new System.Drawing.Point(586, 150);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(16, 19);
+            this.label14.Size = new System.Drawing.Size(19, 23);
             this.label14.TabIndex = 182;
             this.label14.Text = "*";
             // 
@@ -303,12 +305,21 @@
             this.cboPeriodos.FormattingEnabled = true;
             this.cboPeriodos.Items.AddRange(new object[] {
             "Selecione",
-            "Ação Social NSF",
-            "Cedesp",
-            "Calhim"});
-            this.cboPeriodos.Location = new System.Drawing.Point(608, 146);
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00"});
+            this.cboPeriodos.Location = new System.Drawing.Point(603, 146);
             this.cboPeriodos.Name = "cboPeriodos";
-            this.cboPeriodos.Size = new System.Drawing.Size(138, 29);
+            this.cboPeriodos.Size = new System.Drawing.Size(152, 31);
             this.cboPeriodos.TabIndex = 189;
             // 
             // frmSalaVestibularCadastrar
@@ -334,6 +345,7 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmSalaVestibularCadastrar";
             this.Size = new System.Drawing.Size(800, 600);
+            this.Load += new System.EventHandler(this.frmSalaVestibularCadastrar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalasVestibular)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -355,12 +367,12 @@
         private System.Windows.Forms.Button btnVestibularAdd;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cboPeriodos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Registro;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewImageColumn Column2;
         private System.Windows.Forms.DataGridViewImageColumn Column1;
-        private System.Windows.Forms.ComboBox cboPeriodos;
     }
 }

@@ -21,12 +21,12 @@ namespace Nsf.App.API.Client
             var resp = client.PostAsync("http://localhost:5000/SalaVestibular/", body).Result.Content.ReadAsStringAsync().Result;
             VerificarErro(resp);
         }
-        public List<Model.SalaVestibularModel> ListarTodos()
+        public List<Model.SalaVestibularResponse> ListarTodos()
         {
             string json = client.GetAsync("http://localhost:5000/SalaVestibular/").Result.Content.ReadAsStringAsync().Result;
             VerificarErro(json);
 
-            List<Model.SalaVestibularModel> salas = JsonConvert.DeserializeObject<List<Model.SalaVestibularModel>>(json);
+            List<Model.SalaVestibularResponse> salas = JsonConvert.DeserializeObject<List<Model.SalaVestibularResponse>>(json);
             return salas;
         }
         public Model.SalaVestibularModel BuscarPorID(int id)
@@ -52,7 +52,7 @@ namespace Nsf.App.API.Client
         }
         private void VerificarErro(string resposta)
         {
-            if (resposta.Contains("CodigoErro"))
+            if (resposta.Contains("codigoErro"))
             {
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(resposta);
                 throw new ArgumentException(erro.Mensagem);

@@ -54,7 +54,7 @@ namespace Nsf.App.UI
                     if (MessageBox.Show("Deseja deletar a sala?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         api.Deletar(modelo.idSala);
-                        MessageBox.Show("Sala deletada com sucesso");
+                        MessageBox.Show("Sala deletada com sucesso.","NSF",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
                         string instituicao = txtInstituicao.Text.Trim();
                         txtInstituicao.Text = instituicao;

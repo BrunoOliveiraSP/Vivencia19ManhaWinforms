@@ -59,8 +59,16 @@ namespace Nsf.App.API.Client
             string json = client.GetAsync("http://localhost:5000/Sala/" + id).Result.Content.ReadAsStringAsync().Result;
             VerificarErro(json);
 
-            Nsf.App.Model.SalaModel salas = JsonConvert.DeserializeObject<Nsf.App.Model.SalaModel>(json);
-            return salas;
+            Nsf.App.Model.SalaModel sala = JsonConvert.DeserializeObject<Nsf.App.Model.SalaModel>(json);
+            return sala;
+        }
+        public Nsf.App.Model.SalaModel BuscarPorSala(string nome)
+        {
+            string json = client.GetAsync("http://localhost:5000/Sala/BuscarPorNome/" + nome).Result.Content.ReadAsStringAsync().Result;
+            VerificarErro(json);
+
+            Nsf.App.Model.SalaModel sala = JsonConvert.DeserializeObject<Nsf.App.Model.SalaModel>(json);
+            return sala;
         }
 
         public void Alterar(Nsf.App.Model.SalaModel modelo)
