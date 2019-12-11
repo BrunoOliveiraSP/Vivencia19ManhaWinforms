@@ -20,17 +20,7 @@ namespace Nsf.App.UI
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
         {
-            if (txtSigla.Text.Length > 0)
-            {
-                string nmSigla = txtSigla.Text;
-                string primeiraLetra = nmSigla.Substring(0, 1).ToUpper();
-                string restoNm = nmSigla.Substring(1).ToLower();
-                string nomeSigla = primeiraLetra + restoNm;
-                dgvDisciplinas.DataSource = API.ListarSigla(nomeSigla);
-            }
-               
-            else
-                dgvDisciplinas.DataSource = API.ListarTudo();
+            Listar();
         }
 
         private void dgvDisciplinas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -73,21 +63,22 @@ namespace Nsf.App.UI
 
         private void txtDisciplina_TextChanged_1(object sender, EventArgs e)
         {
-            if (txtDisciplina.Text.Length != 0)
-            {
-                string nmdiciplina = txtDisciplina.Text;
-                string primeiraLetra = nmdiciplina.Substring(0, 1).ToUpper();
-                string restoNm = nmdiciplina.Substring(1).ToLower();
-                string nomeDiciplina = primeiraLetra + restoNm;
-                dgvDisciplinas.DataSource = API.ListarDisciplina(nomeDiciplina);
-            }
+            Listar();
+        }
 
-            if (txtDisciplina.Text == string.Empty)
-            {
+        public void Listar()
+        {
+            if (!string.IsNullOrEmpty(txtDisciplina.Text) && !string.IsNullOrEmpty(txtSigla.Text))
+                dgvDisciplinas.DataSource = API.ListarDisciplinaComposta(txtDisciplina.Text, txtSigla.Text);
+
+            else if (txtDisciplina.Text.Length != 0)
+                dgvDisciplinas.DataSource = API.ListarDisciplina(txtDisciplina.Text);
+
+            else if (txtSigla.Text.Length != 0)
+                dgvDisciplinas.DataSource = API.ListarSigla(txtSigla.Text);
+
+            else
                 dgvDisciplinas.DataSource = API.ListarTudo();
-            }
-
-
         }
     }
 }

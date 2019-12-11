@@ -6,13 +6,13 @@ namespace Nsf.App.UI
 {
     public partial class frmDisciplinasCadastrar : NsfUserScreen
     {
+        DiciplinaModel DiciplinaModel;
         public frmDisciplinasCadastrar(DiciplinaModel diciplina)
         {
             InitializeComponent();
             carregar(diciplina);
+            DiciplinaModel = new DiciplinaModel();
         }
-
-        int id;
 
         public void carregar(DiciplinaModel disciplina)
         {
@@ -22,7 +22,6 @@ namespace Nsf.App.UI
                 txtSigla.Text = disciplina.DsSigla;
                 lblId.Text = disciplina.IdDisciplina.ToString();
                 chkAtivo.Checked = Convert.ToBoolean(disciplina.BtAtivo);
-                id = disciplina.IdDisciplina;
             }
         }
 
@@ -33,7 +32,7 @@ namespace Nsf.App.UI
 
                 DiciplinaModel model = new DiciplinaModel();
 
-                if (id == 0)
+                if (DiciplinaModel.IdDisciplina == 0)
                 {
                     model.NmDisciplina = txtDisciplina.Text;
                     model.DsSigla = txtSigla.Text;
@@ -41,14 +40,14 @@ namespace Nsf.App.UI
                     model.DtInclusao = DateTime.Now;
 
                     API.Client.DisciplinaAPI api = new API.Client.DisciplinaAPI();
-                    id = api.Inserir(model);
-                    lblId.Text = id.ToString();
+                    DiciplinaModel = api.Inserir(model);
+                    lblId.Text = DiciplinaModel.IdDisciplina.ToString();
 
                     MessageBox.Show("Diciplina inserida com sucesso!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    model.IdDisciplina = id;
+                    model.IdDisciplina = DiciplinaModel.IdDisciplina;
                     model.NmDisciplina = txtDisciplina.Text;
                     model.DsSigla = txtSigla.Text;
                     model.BtAtivo = Convert.ToUInt64(chkAtivo.Checked);
@@ -64,7 +63,7 @@ namespace Nsf.App.UI
             {
                 MessageBox.Show(ex.Message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Ocorreu um erro. Entre em contato com o administrador.", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

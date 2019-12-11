@@ -25,7 +25,7 @@ namespace Nsf.App.API.Client
             return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
         }
 
-        public int Inserir(DiciplinaModel Disciplina)
+        public DiciplinaModel Inserir(DiciplinaModel Disciplina)
         {
 
             string json = JsonConvert.SerializeObject(Disciplina);
@@ -37,7 +37,7 @@ namespace Nsf.App.API.Client
             string JsonResposta = LerJson(respota);
             Disciplina = JsonConvert.DeserializeObject<DiciplinaModel>(JsonResposta);
 
-            return Disciplina.IdDisciplina;
+            return Disciplina;
         }
 
         public void Alterar(DiciplinaModel Disciplina)
@@ -73,6 +73,16 @@ namespace Nsf.App.API.Client
         {
 
             string json = client.GetAsync($"http://localhost:5000/Diciplina/ConsultarPorDisciplina/{disciplina}")
+                                .Result
+                                .Content
+                                .ReadAsStringAsync()
+                                .Result;
+            return JsonConvert.DeserializeObject<List<DiciplinaModel>>(json);
+        }
+
+        public List<DiciplinaModel> ListarDisciplinaComposta(string disciplina, string sigla)
+        {
+            string json = client.GetAsync($"http://localhost:5000/Diciplina/ListarDisciplina/{disciplina}/{sigla}")
                                 .Result
                                 .Content
                                 .ReadAsStringAsync()
