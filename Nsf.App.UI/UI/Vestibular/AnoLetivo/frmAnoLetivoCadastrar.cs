@@ -15,10 +15,31 @@ namespace Nsf.App.UI
         {
             InitializeComponent();
             CarregarCruso();
+
+            ((Control)this.tabTurmas).Enabled = false;
+            ((Control)this.tabModulos).Enabled = false;
+            ((Control)this.tabDisciplinas).Enabled = false;
+            ((Control)this.tabAcessos).Enabled = false;
         }
 
         Model.TurmaModel turmaModel = new Model.TurmaModel();
         Model.AnoLetivoModel anoLetivoModel = new AnoLetivoModel();
+
+        private void LimparCamposAnoLetivo()
+        {
+            nudAno.Value = DateTime.Now.Year;
+            dtpInicio.Value = DateTime.Now;
+            cboStatus.Text = string.Empty;
+            dtpFim.Value = DateTime.Now;
+        }
+
+        private void LimparCamposTurma()
+        {
+            cboTurmaPeriodo.Text = string.Empty;
+            txtTurmaNome.Text = string.Empty;
+            nudTurmaCapacidade.Value = 1;
+            cboTurmaCurso.Text = string.Empty;
+        }
 
         private void CarregarCruso()
         {
@@ -64,22 +85,31 @@ namespace Nsf.App.UI
                     model.IdAnoLetivo = anoLetivoModel.IdAnoLetivo;
                     api.Alterar(model);
 
-                    MessageBox.Show("Alterado com sucesso");
+                    MessageBox.Show("Alterado com sucesso", "Alterar Ano Letivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.LimparCamposAnoLetivo();
                 }
                 else
                 {
                     Model.AnoLetivoModel anoLetivo = api.Inserir(model);
 
-                    MessageBox.Show("Cadastrado com sucesso");
+                    MessageBox.Show("Cadastrado com sucesso", "Abrir Ano Letivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     anoLetivoModel = anoLetivo;
 
                     CarregarGrid(anoLetivoModel.IdAnoLetivo);
+
+                    this.LimparCamposAnoLetivo();
+
+                    ((Control)this.tabTurmas).Enabled = true;
+                    ((Control)this.tabModulos).Enabled = true;
+                    ((Control)this.tabDisciplinas).Enabled = true;
+                    ((Control)this.tabAcessos).Enabled = true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -87,11 +117,6 @@ namespace Nsf.App.UI
         {
             try
             {
-                if(anoLetivoModel.IdAnoLetivo == 0)
-                {
-                    throw new ArgumentException("Impossível criar ou alterar uma turma sem antes selecionar um Ano Letivo");
-                }
-
                 Nsf.App.Model.TurmaModel model = new Model.TurmaModel();
 
                 Model.CursoModel comboCurso = cboTurmaCurso.SelectedItem as Model.CursoModel;
@@ -109,24 +134,28 @@ namespace Nsf.App.UI
                     model.IdTurma = turmaModel.IdTurma;
                     api.Alterar(model);
 
-                    MessageBox.Show("Alterado com sucesso");
+                    MessageBox.Show("Alterado com sucesso", "Alterar Turma", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     dgvTurma.DataSource = null;
                     this.CarregarGrid(anoLetivoModel.IdAnoLetivo);
+
+                    this.LimparCamposTurma();
                 }
                 else
                 {
                     api.InserirTurma(model);
 
-                    MessageBox.Show("Cadastrado com sucesso");
+                    MessageBox.Show("Cadastrado com sucesso", "Cadastrar Turma", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     dgvTurma.DataSource = null;
                     this.CarregarGrid(anoLetivoModel.IdAnoLetivo);
+
+                    this.LimparCamposTurma();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -142,30 +171,53 @@ namespace Nsf.App.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void dgvTurma_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void frmAnoLetivoCadastrar_Load(object sender, EventArgs e)
         {
-            if(e.ColumnIndex == 4)
+            cboTurmaPeriodo.SelectedIndex = 0;
+            cboStatus.SelectedIndex = 0;
+            cboModuloTipo.SelectedIndex = 0;
+
+            if(anoLetivoModel.IdAnoLetivo > 0)
             {
-                Model.TurmaModel turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaModel;
+                btnSalvar.Text = "Editar Ano Letivo";
+
+                ((Control)this.tabTurmas).Enabled = true;
+                ((Control)this.tabModulos).Enabled = true;
+                ((Control)this.tabDisciplinas).Enabled = true;
+                ((Control)this.tabAcessos).Enabled = true;
+            }
+        }
+
+        private void dgvTurma_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                Model.TurmaResponse turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaResponse;
 
                 cboTurmaPeriodo.Text = turma.TpPeriodo;
                 txtTurmaNome.Text = turma.NmTurma;
                 nudTurmaCapacidade.Value = turma.NrCapacidadeMax;
+                cboTurmaCurso.Text = turma.NmCurso;
 
-                turmaModel = turma;
+                turmaModel.IdTurma = turma.IdTurma;
+                turmaModel.NmTurma = turma.NmTurma;
+                turmaModel.NrCapacidadeMax = turma.NrCapacidadeMax;
+                turmaModel.TpPeriodo = turma.TpPeriodo;
+
+                btnTurmaAdd.Text = "Alterar";
             }
 
-            if(e.ColumnIndex == 5)
+            if (e.ColumnIndex == 5)
             {
                 try
                 {
                     Model.TurmaModel turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaModel;
 
-                    DialogResult r = MessageBox.Show("Deseja Remover?", "Remover", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult r = MessageBox.Show("Deseja Remover?", "Remover Turma", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (r == DialogResult.Yes)
                     {
@@ -173,7 +225,7 @@ namespace Nsf.App.UI
 
                         api.Remover(turma.IdTurma);
 
-                        MessageBox.Show("Removido com sucesso");
+                        MessageBox.Show("Removido com sucesso", "Remover Turma", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         dgvTurma.DataSource = null;
                         this.CarregarGrid(anoLetivoModel.IdAnoLetivo);
@@ -181,8 +233,23 @@ namespace Nsf.App.UI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+            }
+        }
+
+        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboStatus.Text == "Encerrado")
+            {
+                rdnFechado.Checked = true;
+                rdnAberto.Checked = false;
+            }
+
+            if (cboStatus.Text == "Em andamento")
+            {
+                rdnFechado.Checked = false;
+                rdnAberto.Checked = true;
             }
         }
     }

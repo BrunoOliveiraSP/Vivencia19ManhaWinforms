@@ -18,29 +18,28 @@ namespace Nsf.App.API.Client
             string json = JsonConvert.SerializeObject(turma);
             StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var resp = client.PostAsync("http://localhost:5000/turma/", body).Result;
+            var resp = client.PostAsync("http://localhost:5000/Turma/", body).Result;
+
+            string jsonResposta = resp.Content.ReadAsStringAsync().Result;
 
             if (resp.IsSuccessStatusCode == false)
             {
-                string jsonResposta = resp.Content
-                                          .ReadAsStringAsync()
-                                          .Result;
-
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
                 throw new ArgumentException(erro.Mensagem);
             }
         }
+
         public List<Nsf.App.Model.TurmaResponse> ConsultarTurmaPorAnoLetivo(int id)
         {
             HttpClient client = new HttpClient();
 
-            string json = client.GetAsync("http://localhost:5000/turma/" + id).Result
+            string json = client.GetAsync("http://localhost:5000/Turma/" + id).Result
                                                                          .Content
                                                                          .ReadAsStringAsync()
                                                                          .Result;
 
-            List<TurmaResponse> turma = JsonConvert.DeserializeObject<List<TurmaResponse>>(json);
-            return turma;
+            List<TurmaResponse> Turma = JsonConvert.DeserializeObject<List<TurmaResponse>>(json);
+            return Turma;
         }
         public void Alterar(Nsf.App.Model.TurmaModel model)
         {

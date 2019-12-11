@@ -23,7 +23,6 @@ namespace Nsf.App.API.Client
 
             if (resp.IsSuccessStatusCode == false)
             {
-
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
                 throw new ArgumentException(erro.Mensagem);
             }
