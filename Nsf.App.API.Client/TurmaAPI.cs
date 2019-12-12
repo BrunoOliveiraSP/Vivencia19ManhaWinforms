@@ -65,12 +65,10 @@ namespace Nsf.App.API.Client
             HttpClient client = new HttpClient();
             var resp = client.DeleteAsync("http://localhost:5000/Turma/" + id).Result;
 
+            string jsonResposta = resp.Content.ReadAsStringAsync().Result;
+
             if (resp.IsSuccessStatusCode == false)
             {
-                string jsonResposta = resp.Content
-                                          .ReadAsStringAsync()
-                                          .Result;
-
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
                 throw new ArgumentException(erro.Mensagem);
             }

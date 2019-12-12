@@ -105,6 +105,8 @@ namespace Nsf.App.UI
                     ((Control)this.tabModulos).Enabled = true;
                     ((Control)this.tabDisciplinas).Enabled = true;
                     ((Control)this.tabAcessos).Enabled = true;
+
+                    btnSalvar.Text = "Editar Ano Letivo";
                 }
             }
             catch (Exception ex)
@@ -215,7 +217,7 @@ namespace Nsf.App.UI
             {
                 try
                 {
-                    Model.TurmaModel turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaModel;
+                    Model.TurmaResponse turma = dgvTurma.CurrentRow.DataBoundItem as Model.TurmaResponse;
 
                     DialogResult r = MessageBox.Show("Deseja Remover?", "Remover Turma", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
