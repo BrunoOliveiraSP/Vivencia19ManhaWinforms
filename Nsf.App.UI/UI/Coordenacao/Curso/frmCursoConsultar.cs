@@ -14,18 +14,13 @@ namespace Nsf.App.UI
 
         private void txtCurso_TextChanged(object sender, EventArgs e)
         {
-            if (txtCurso.Text != string.Empty)
+            if (txtCurso.Text != string.Empty && txtSigla.Text != string.Empty)
             {
-                string nmcurso = txtCurso.Text;
-                string primeiraLetra = nmcurso.Substring(0, 1).ToUpper();
-                string restoNm = nmcurso.Substring(1).ToLower();
-                string nomeCurso = primeiraLetra + restoNm;
-
+                string nome = txtCurso.Text;
+                string sigla = txtSigla.Text;
                 API.Client.CursoApi api = new API.Client.CursoApi();
+                List<Model.CursoModel> cursos = api.ConsultarPorNomeSigla(nome, sigla);
 
-                List<Model.CursoModel> cursos = api.ConsultarPorNome(nomeCurso);
-
-                dgvCursos.AutoGenerateColumns = false;
                 dgvCursos.DataSource = cursos;
             }
             else
@@ -66,9 +61,9 @@ namespace Nsf.App.UI
                         Model.CursoModel curso = dgvCursos.CurrentRow.DataBoundItem as Model.CursoModel;
 
                         API.Client.CursoApi api = new API.Client.CursoApi();
+                        
                         api.Remover(curso.IdCurso);
-
-                        MessageBox.Show("Curso removido do sistema com sucesso", "NSF");
+                        MessageBox.Show("Curso removido do sistema com sucesso!", "NSF");
                     }
                     CarregarGrid();
                 }
@@ -91,13 +86,14 @@ namespace Nsf.App.UI
          }
 
         private void txtSigla_TextChanged(object sender, EventArgs e)
-        {//a
-            if (txtSigla.Text != string.Empty)
+        {
+            if (txtSigla.Text != string.Empty && txtCurso.Text != string.Empty)
             {
-                string sigla = txtSigla.Text.ToUpper();
+                string nome = txtCurso.Text;
+                string sigla = txtSigla.Text;
 
                 API.Client.CursoApi api = new API.Client.CursoApi();
-                List<Model.CursoModel> consulta = api.ConsultarPorSigla(sigla);
+                List<Model.CursoModel> consulta = api.ConsultarPorNomeSigla(nome, sigla);
 
                 dgvCursos.DataSource = consulta;
             }

@@ -13,7 +13,7 @@ namespace Nsf.App.API.Client
     {
         HttpClient client = new HttpClient();
 
-        public void InserirCurso(Nsf.App.Model.CursoModel curso)
+        public Model.CursoModel InserirCurso(Nsf.App.Model.CursoModel curso)
         {
             
             string json = JsonConvert.SerializeObject(curso);
@@ -21,24 +21,19 @@ namespace Nsf.App.API.Client
 
             HttpResponseMessage resp = client.PostAsync("http://localhost:5000/Curso/", body).Result;
 
-            if (resp.IsSuccessStatusCode == false)
-            {
-                string jsonResposta = resp.Content
-                                      .ReadAsStringAsync()
-                                      .Result;
+            string jsonResposta = this.VerificarErro(resp);
+            curso = JsonConvert.DeserializeObject<Model.CursoModel>(jsonResposta);
 
-                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
-                throw new Exception(erro.Mensagem);
-            }
+            return curso;
 
         }
 
         public void AlterarCurso(Model.CursoModel curso)
         {
             
-                string json = JsonConvert.SerializeObject(curso);
-                StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
-                var resposta = client.PutAsync("http://localhost:5000/Curso/", body).Result;
+            string json = JsonConvert.SerializeObject(curso);
+            StringContent body = new StringContent(json, Encoding.UTF8, "application/json");
+            var resposta = client.PutAsync("http://localhost:5000/Curso/", body).Result;
 
             if (resposta.IsSuccessStatusCode == false)
             {
@@ -52,26 +47,25 @@ namespace Nsf.App.API.Client
         }
         public List<Model.CursoModel> ListarTodos()
         {
-            string json = client.GetAsync("http://localhost:5000/Curso/")
+            string json = client.GetAsync("http://localhost:5000/Curso/ConsultarTodos")
                                 .Result
                                 .Content
                                 .ReadAsStringAsync()
                                 .Result;
 
-            this.VerificarErro(json);
+            
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
         }
 
-        public List<Model.CursoModel> ConsultarPorNome(string nome)
+        public List<Model.CursoModel> ConsultarPorNomeSigla(string nome, string sigla)
         {
-            string json = client.GetAsync("http://localhost:5000/Curso/ConsultarPorNome/" + nome)
+            string json = client.GetAsync("http://localhost:5000/Curso?nome=" + nome + "&sigla=" + sigla)
                                 .Result
                                 .Content
                                 .ReadAsStringAsync()
                                 .Result;
 
-            this.VerificarErro(json);
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
 
@@ -88,7 +82,6 @@ namespace Nsf.App.API.Client
                                       .Result;
 
                 Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(jsonResposta);
-                throw new Exception(erro.Mensagem);
             }
         }
 
@@ -100,20 +93,25 @@ namespace Nsf.App.API.Client
                                 .ReadAsStringAsync()
                                 .Result;
 
-            this.VerificarErro(json);
-
-
+            
             List<Model.CursoModel> cursos = JsonConvert.DeserializeObject<List<Model.CursoModel>>(json);
             return cursos;
         }
 
-        private void VerificarErro(string respostaAPI)
+        private string VerificarErro(HttpResponseMessage resp)
         {
-            if (respostaAPI.Contains("CodigoErro"))
+            string json = resp
+                          .Content
+                          .ReadAsStringAsync()
+                          .Result;
+            if (resp.IsSuccessStatusCode == false)
             {
-                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(respostaAPI);
-                throw new ArgumentException(erro.Mensagem);
+                
+                Model.ErroModel erro = JsonConvert.DeserializeObject<Model.ErroModel>(json);
+                throw new Exception(erro.Mensagem);
             }
+
+            return json;
         }
     }
 }

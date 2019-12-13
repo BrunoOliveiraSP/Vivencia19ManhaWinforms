@@ -45,14 +45,8 @@ namespace Nsf.App.UI
                 int id = Convert.ToInt32(lblId.Text);
                 if (id == 0)
                 {
-
                     Nsf.App.Model.CursoModel curso = new Model.CursoModel();
-
-                    string nmcurso = txtCurso.Text;
-                    string primeiraLetra = nmcurso.Substring(0, 1).ToUpper();
-                    string restoNm= nmcurso.Substring(1).ToLower();
-                    string nomeCurso = primeiraLetra + restoNm;
-                    curso.NmCurso = nomeCurso;
+                    curso.NmCurso = txtCurso.Text;
                     curso.DsSigla = txtSigla.Text.ToUpper();
                     curso.DsCategoria = cboCategoria.Text;
                     curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
@@ -62,22 +56,17 @@ namespace Nsf.App.UI
                         curso.BtAtivo = 0;
 
                     Nsf.App.API.Client.CursoApi api = new API.Client.CursoApi();
-                    api.InserirCurso(curso);
-                    MessageBox.Show("Curso inserido no sistema com sucesso", "NSF");
+                    Model.CursoModel modelo = api.InserirCurso(curso);
+                    MessageBox.Show("Curso inserido no sistema com sucesso!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LimparCampos();
+                    lblId.Text = modelo.IdCurso.ToString();
 
                 }
                 else
                 {
                     Nsf.App.Model.CursoModel curso = new Model.CursoModel();
                     curso.IdCurso = Convert.ToInt32(lblId.Text);
-
-                    string nmcurso = txtCurso.Text;
-                    string primeiraLetra = nmcurso.Substring(0, 1).ToUpper();
-                    string restoNm = nmcurso.Substring(1).ToLower();
-                    string cursoNome = primeiraLetra + restoNm;
-                    curso.NmCurso = cursoNome; ;
+                    curso.NmCurso = txtCurso.Text;
                     curso.DsSigla = txtSigla.Text.ToUpper();
                     curso.DsCategoria = cboCategoria.Text;
                     curso.NrCapacidadeMaxima = Convert.ToInt32(nudCapacidade.Value);
@@ -88,15 +77,9 @@ namespace Nsf.App.UI
 
                     Nsf.App.API.Client.CursoApi api = new API.Client.CursoApi();
                     api.AlterarCurso(curso);
-                    MessageBox.Show("Dados do curso alterados com sucesso", "NSF");
-
-                    LimparCampos();
-
+                    MessageBox.Show("Dados do curso alterados com sucesso!", "NSF", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
-
-
-
             }
             catch (Exception ex)
             {
